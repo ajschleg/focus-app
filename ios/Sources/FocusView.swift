@@ -29,15 +29,24 @@ struct FocusView: View {
 
             Spacer()
 
-            Button(role: .destructive) {
-                engine.endBlock()
-            } label: {
-                Text("End block early")
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
+            VStack(spacing: 8) {
+                Button(role: .destructive) {
+                    engine.endBlock()
+                } label: {
+                    Text("End block early")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+
+                if engine.potentialEarlyQuitPenalty > 0 {
+                    Text("Quitting now costs \(engine.potentialEarlyQuitPenalty) pts")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .contentTransition(.numericText())
+                }
             }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
         }
         .padding()
     }

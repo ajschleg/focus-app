@@ -14,13 +14,25 @@ final class FocusEngine: ObservableObject {
     @Published private(set) var remaining: TimeInterval = 0
     @Published private(set) var events: [DistractionEvent] = []
     @Published private(set) var completedFocus: TimeInterval = 0
+    @Published private(set) var endedEarly: Bool = false
+    @Published private(set) var earlyQuitPenalty: Int = 0
 
     var leftAppCount: Int { events.lazy.filter { $0.kind == .leftApp }.count }
     var pickupCount: Int { events.lazy.filter { $0.kind == .pickup }.count }
 
+    /// Max points lost for bailing at the very start of a block. The actual
+    /// penalty scales linearly with how much of the block you abandon, so
+    /// quitting near the end costs little. Loss aversion, used sparingly
+    /// (CONCEPT.md §5).
+    private let earlyQuitMaxPenalty = 50
+
     /// Toy score so the review screen has a payoff. Purely to make the loop
     /// feel real — the real reward economy (CONCEPT.md §5) comes later.
-    var score: Int { max(0, 100 - leftAppCount * 8 - pickupCount * 4) }
+    var score: Int { max(0, 100 - leftAppCount * 8 - pickupCount * 4 - earlyQuitPenalty) }
+
+    /// What the early-quit penalty would be if you bailed right now. Updates
+    /// live during focus so the cost of quitting is never a surprise.
+    var potentialEarlyQuitPenalty: Int { penalty(forRemaining: remaining) }
 
     var motionAvailable: Bool { motion.isAvailable }
 
@@ -45,6 +57,8 @@ final class FocusEngine: ObservableObject {
         guard state == .planning else { return }
         events = []
         completedFocus = 0
+        earlyQuitPenalty = 0
+        endedEarly = false
         let now = Date()
         startDate = now
         endDate = now.addingTimeInterval(template.focusDuration)
@@ -59,7 +73,7 @@ final class FocusEngine: ObservableObject {
     }
 
     /// User tapped "End block early".
-    func endBlock() { finish() }
+    func endBlock() { finish(early: true) }
 
     /// Back to the planning screen for another block.
     func reset() {
@@ -67,6 +81,8 @@ final class FocusEngine: ObservableObject {
         state = .planning
         events = []
         completedFocus = 0
+        earlyQuitPenalty = 0
+        endedEarly = false
         startDate = nil
         endDate = nil
         remaining = 0
@@ -84,20 +100,32 @@ final class FocusEngine: ObservableObject {
         let left = endDate.timeIntervalSinceNow
         if left <= 0 {
             remaining = 0
-            finish()
+            finish(early: false)
         } else {
             remaining = left
         }
     }
 
-    private func finish() {
+    private func finish(early: Bool) {
         guard state == .focusing else { return }
         ticker?.cancel(); ticker = nil
         motion.stop()
         UIApplication.shared.isIdleTimerDisabled = false
         if let startDate { completedFocus = Date().timeIntervalSince(startDate) }
+        endedEarly = early
+        let remainingTime = max(0, template.focusDuration - completedFocus)
+        earlyQuitPenalty = early ? penalty(forRemaining: remainingTime) : 0
         remaining = 0
         state = .review
+    }
+
+    /// Linear penalty: full `earlyQuitMaxPenalty` if the whole block is left,
+    /// scaling to ~0 as the time remaining approaches zero.
+    private func penalty(forRemaining remainingTime: TimeInterval) -> Int {
+        let total = template.focusDuration
+        guard total > 0 else { return 0 }
+        let fractionLeft = min(1, max(0, remainingTime) / total)
+        return Int((Double(earlyQuitMaxPenalty) * fractionLeft).rounded())
     }
 
     private func record(_ kind: DistractionKind) {

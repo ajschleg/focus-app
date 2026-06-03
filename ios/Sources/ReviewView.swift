@@ -7,8 +7,9 @@ struct ReviewView: View {
         ScrollView {
             VStack(spacing: 24) {
                 VStack(spacing: 6) {
-                    Text("Block complete")
+                    Text(engine.endedEarly ? "Block ended early" : "Block complete")
                         .font(.largeTitle.bold())
+                        .multilineTextAlignment(.center)
                     Text(engine.template.name)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -30,11 +31,18 @@ struct ReviewView: View {
                     SummaryCard(value: "\(engine.pickupCount)", label: "pickups")
                 }
 
+                if engine.endedEarly {
+                    EarlyQuitBanner(remainingText: minutesString(remainingAtQuit),
+                                    penalty: engine.earlyQuitPenalty)
+                }
+
                 if engine.events.isEmpty {
-                    Label("No distractions detected — clean block!", systemImage: "checkmark.seal.fill")
-                        .font(.headline)
-                        .foregroundStyle(.green)
-                        .padding(.vertical, 8)
+                    if !engine.endedEarly {
+                        Label("No distractions detected — clean block!", systemImage: "checkmark.seal.fill")
+                            .font(.headline)
+                            .foregroundStyle(.green)
+                            .padding(.vertical, 8)
+                    }
                 } else {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Distraction log")
@@ -77,6 +85,10 @@ struct ReviewView: View {
         }
     }
 
+    private var remainingAtQuit: TimeInterval {
+        max(0, engine.template.focusDuration - engine.completedFocus)
+    }
+
     private var scoreColor: Color {
         switch engine.score {
         case 85...:    return .green
@@ -113,6 +125,38 @@ private struct SummaryCard: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+private struct EarlyQuitBanner: View {
+    let remainingText: String
+    let penalty: Int
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "hourglass.bottomhalf.filled")
+                .font(.title2)
+                .foregroundStyle(.orange)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Ended early")
+                    .font(.headline)
+                Text("\(remainingText) left on the clock")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            if penalty > 0 {
+                Text("−\(penalty)")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.orange)
+            } else {
+                Text("no penalty")
+                    .font(.caption)
+                    .foregroundStyle(.green)
+            }
+        }
+        .padding()
+        .background(.orange.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
     }
 }
 
