@@ -1,0 +1,11 @@
+// Project-wide signing configuration.
+//
+// Your personal DEVELOPMENT_TEAM is intentionally NOT stored here — it goes in
+// Signing.local.xcconfig (gitignored) so it never lands in version control:
+//
+//     DEVELOPMENT_TEAM = ABCDE12345
+//
+// Simulator builds need no team. To run on a physical device, create
+// ios/Signing.local.xcconfig with your Team ID (a free Apple ID works), or set
+// the team in Xcode's Signing & Capabilities tab and copy it there.
+#include? "Signing.local.xcconfig"

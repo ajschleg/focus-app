@@ -11,9 +11,6 @@ settings:
     MARKETING_VERSION: "0.1.0"
     CURRENT_PROJECT_VERSION: "1"
     CODE_SIGN_STYLE: Automatic
-    # Leave DEVELOPMENT_TEAM blank here — set your team once in Xcode's
-    # "Signing & Capabilities" tab. A free Apple ID is enough to run on a device.
-    DEVELOPMENT_TEAM: ""
 
 targets:
   FocusSlice:
@@ -23,6 +20,11 @@ targets:
     sources:
       - path: Sources
     scheme: {}   # generate a shared scheme so a clean clone can build without Xcode autocreating one
+    configFiles:
+      # DEVELOPMENT_TEAM lives in the gitignored Signing.local.xcconfig so it
+      # never enters version control — see ios/Signing.xcconfig.
+      Debug: Signing.xcconfig
+      Release: Signing.xcconfig
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ajschleg.FocusSlice

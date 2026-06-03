@@ -27,6 +27,7 @@
 		C62BB66BF7B1B69DA7683FF5 /* FocusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEngine.swift; sourceTree = "<group>"; };
 		D6F2366EB92CC8D1ABB57639 /* FocusSliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSliceApp.swift; sourceTree = "<group>"; };
 		E3ED950FEF27AACBC8AAC01B /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		"TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -61,6 +62,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		"TEMP_89ADAFD0-04C6-4E04-B7CC-252070245DCE" /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,7 +100,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					BAD07030A49EB411091D5DE8 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -171,7 +179,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -203,6 +210,7 @@
 		};
 		4C7BEB054887AD09F8746349 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = "TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -260,7 +268,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -285,6 +292,7 @@
 		};
 		C2C4CE9010EE9AD21ED46767 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = "TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

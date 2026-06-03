@@ -20,3 +20,6 @@ xcuserdata/
 # CocoaPods / Carthage (not used yet, here for safety)
 Pods/
 Carthage/Build/
+
+# Local signing config — keeps your personal DEVELOPMENT_TEAM out of version control
+Signing.local.xcconfig
