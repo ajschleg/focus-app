@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ReviewView: View {
     @EnvironmentObject private var engine: FocusEngine
+    @EnvironmentObject private var experience: ExperienceStore
+    @EnvironmentObject private var board: QuestBoard
 
     var body: some View {
         ScrollView {
@@ -16,13 +18,24 @@ struct ReviewView: View {
                 }
                 .padding(.top, 40)
 
-                HStack(alignment: .lastTextBaseline, spacing: 4) {
-                    Text("\(engine.score)")
-                        .font(.system(size: 64, weight: .bold, design: .rounded))
-                        .foregroundStyle(scoreColor)
-                    Text("/ 100")
-                        .font(.title3)
+                VStack(spacing: 8) {
+                    HStack(alignment: .lastTextBaseline, spacing: 4) {
+                        Text("\(engine.score)")
+                            .font(.system(size: 64, weight: .bold, design: .rounded))
+                            .foregroundStyle(scoreColor)
+                        Text("/ 100")
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                    }
+                    // The score was banked as XP on entering review, so the
+                    // total shown here already includes this block.
+                    Label("+\(engine.score) XP · \(experience.total) total", systemImage: "sparkles")
+                        .font(.subheadline.weight(.semibold).monospacedDigit())
                         .foregroundStyle(.secondary)
+                }
+
+                if let outcome = experience.lastOutcome {
+                    LevelVerdict(outcome: outcome, experience: experience)
                 }
 
                 HStack(spacing: 16) {
@@ -34,6 +47,13 @@ struct ReviewView: View {
                 if engine.endedEarly {
                     EarlyQuitBanner(remainingText: minutesString(remainingAtQuit),
                                     penalty: engine.earlyQuitPenalty)
+                }
+
+                BreakSummary(detail: breakDetail, credit: engine.breakCredit)
+
+                if !board.resolvedQuests.isEmpty {
+                    QuestOutcomes(quests: board.resolvedQuests,
+                                  coinsEarned: board.coinsEarnedThisCycle)
                 }
 
                 if engine.events.isEmpty {
@@ -69,19 +89,25 @@ struct ReviewView: View {
                     .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
                 }
 
-                Button {
-                    engine.reset()
-                } label: {
-                    Text("Plan another block")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .padding(.top, 8)
             }
             .padding()
+        }
+        // Pinned below the scroll, same as the plan screen's start button —
+        // however long the review gets, the way forward is always on screen.
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                engine.reset()
+            } label: {
+                Text("Plan another block")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+            .background(.ultraThinMaterial)
         }
     }
 
@@ -89,12 +115,23 @@ struct ReviewView: View {
         max(0, engine.template.focusDuration - engine.completedFocus)
     }
 
+    /// One-line account of the break that feeds the `BreakSummary` banner.
+    private var breakDetail: String {
+        guard engine.breakDuration > 0 else { return "Ended focus too early to earn a break" }
+        guard engine.completedBreak > 0 else { return "Break skipped" } // declined at the prompt
+        let taken = minutesString(engine.completedBreak)
+        if engine.breakEndedEarly { return "\(taken) taken · break skipped early" }
+        if engine.endedEarly { return "\(taken) taken · shortened from \(minutesString(engine.template.breakDuration))" }
+        return "\(taken) taken · full break"
+    }
+
+    /// Colored against the *ladder's* bar, not fixed bands — the big number
+    /// and the verdict card directly beneath it must never disagree.
     private var scoreColor: Color {
-        switch engine.score {
-        case 85...:    return .green
-        case 60..<85:  return .yellow
-        default:       return .orange
-        }
+        let target = experience.lastOutcome?.target ?? experience.level.targetScore
+        if engine.score >= target { return .green }
+        if engine.score >= target - 10 { return .yellow }
+        return .orange
     }
 
     private func minutesString(_ t: TimeInterval) -> String {
@@ -160,6 +197,148 @@ private struct EarlyQuitBanner: View {
     }
 }
 
+/// The ladder's verdict on this block: promoted (with the coin reward, or a
+/// note that it was already claimed), demoted, or progress toward either.
+/// `experience` reflects the level *after* the move, which is what we show.
+private struct LevelVerdict: View {
+    let outcome: LevelOutcome
+    @ObservedObject var experience: ExperienceStore
+
+    var body: some View {
+        let level = experience.level
+        HStack(spacing: 12) {
+            Image(systemName: level.systemImage)
+                .font(.title2)
+                .foregroundStyle(tint)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(headline)
+                    .font(.headline)
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            if case .promoted(let coins) = outcome.movement, coins > 0 {
+                Label("+\(coins)", systemImage: "f.circle.fill")
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(.orange)
+            }
+        }
+        .padding()
+        .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var tint: Color {
+        switch outcome.movement {
+        case .promoted: return experience.level.tint
+        case .demoted:  return .orange
+        case .stayed:   return outcome.metTarget ? .green : .orange
+        }
+    }
+
+    private var headline: String {
+        switch outcome.movement {
+        case .promoted: return "Promoted to \(experience.level.name)!"
+        case .demoted:  return "Demoted to \(experience.level.name)"
+        case .stayed:   return outcome.metTarget ? "Target met — \(outcome.score) vs \(outcome.target)"
+                                                 : "Below target — \(outcome.score) vs \(outcome.target)"
+        }
+    }
+
+    private var detail: String {
+        let level = experience.level
+        switch outcome.movement {
+        case .promoted(let coins):
+            return coins > 0 ? "First time at this level — reward earned."
+                             : "Reward already claimed for this level."
+        case .demoted:
+            return "Score \(level.targetScore)+ to climb back."
+        case .stayed:
+            if outcome.metTarget {
+                guard let next = experience.nextLevel else { return "Holding the summit." }
+                return "\(experience.wins)/\(level.winsToPromote) wins toward \(next.name)"
+            } else {
+                guard let previous = experience.previousLevel else { return "No demotion at level 1 — keep climbing." }
+                return "\(experience.misses)/\(level.missesToDemote) slips before dropping to \(previous.name)"
+            }
+        }
+    }
+}
+
+/// How the cycle's quests settled and the focus coins they paid out. Statuses
+/// are final by the time review renders, so plain reads are enough here.
+private struct QuestOutcomes: View {
+    let quests: [Quest]
+    let coinsEarned: Int
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("Quests")
+                    .font(.headline)
+                Spacer()
+                if coinsEarned > 0 {
+                    Label("+\(coinsEarned)", systemImage: "f.circle.fill")
+                        .font(.subheadline.weight(.semibold).monospacedDigit())
+                        .foregroundStyle(.orange)
+                }
+            }
+            .padding(.bottom, 8)
+            ForEach(quests) { quest in
+                HStack {
+                    Image(systemName: quest.status == .completed ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .frame(width: 24)
+                        .foregroundStyle(quest.status == .completed ? .green : .orange)
+                    Text(quest.title)
+                    Spacer()
+                    Text(quest.status == .completed ? "+\(quest.reward)" : "—")
+                        .font(.callout.monospacedDigit())
+                        .foregroundStyle(quest.status == .completed ? .green : .secondary)
+                }
+                .padding(.vertical, 8)
+                if quest.id != quests.last?.id {
+                    Divider()
+                }
+            }
+        }
+        .padding()
+        .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+/// The break payoff: how much break you took and the credit it folded into the
+/// score. Always shown — a full break is a positive to reinforce (CONCEPT.md §5).
+private struct BreakSummary: View {
+    let detail: String
+    let credit: Int
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "cup.and.saucer.fill")
+                .font(.title2)
+                .foregroundStyle(.green)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Break")
+                    .font(.headline)
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            Text("+\(credit)")
+                .font(.title3.bold().monospacedDigit())
+                .foregroundStyle(credit > 0 ? .green : .secondary)
+        }
+        .padding()
+        .background(.green.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+    }
+}
+
 #Preview {
-    ReviewView().environmentObject(FocusEngine())
+    let experience = ExperienceStore()
+    let engine = FocusEngine(experience: experience)
+    ReviewView()
+        .environmentObject(engine)
+        .environmentObject(experience)
+        .environmentObject(QuestBoard(engine: engine, coins: CoinStore()))
 }

@@ -8,8 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1B883FE417927688C96F07BC /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888F3CE7E2D88D08997748C /* FocusView.swift */; };
+		2AE34C9320CAEBB26EF7547F /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048E0C38704627F6294DD78 /* Quest.swift */; };
 		45A7DDD489FB633F9C168D71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A352E47D58681BE629FF2D3E /* ContentView.swift */; };
+		556C3676D78EC921DE49AF8C /* ExperienceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A7B1C2E938C28662021D0 /* ExperienceStore.swift */; };
+		60927EE72B1D85A67F3643C7 /* BreakPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB26F535636FF8220E41451F /* BreakPromptView.swift */; };
 		9DB3F29145820CB39F12D213 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED950FEF27AACBC8AAC01B /* PlanView.swift */; };
+		A032E175F1F93B91D796E9C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A1EBF6BC6B0E55F2C85923D /* Assets.xcassets */; };
+		A30E5EA37E55BA916EE1799D /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF91094F1743A1A5BBF30A6 /* Levels.swift */; };
+		ADD9B34CB7254D6F05CBA4BE /* CoinStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AC73B776085CC741AE7090 /* CoinStore.swift */; };
+		AEBDFBC19D4AC6B7DD0322A0 /* BreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B976461D3698E84E0FFF277 /* BreakView.swift */; };
+		B19B6ACDFCD8C4B8E0EAEDDB /* QuestBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */; };
+		B91063D0615D7DA61FBE3402 /* BlockNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0650365E81903B22E47911 /* BlockNotifier.swift */; };
+		C126A4349E13116DA5EDE91D /* Quests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8A92B39DAA805454A6BAA9 /* Quests.swift */; };
 		D077EAC2F3F2AF628ED74B09 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CB7114CCC3AFD1C56AEBD /* Models.swift */; };
 		D3ECA2B4125051EB8CD33630 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D497AF4620EB6F17673852 /* ReviewView.swift */; };
 		DB7CAE4CF43F814B4B6B1238 /* MotionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */; };
@@ -18,29 +28,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B976461D3698E84E0FFF277 /* BreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakView.swift; sourceTree = "<group>"; };
 		36D497AF4620EB6F17673852 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetector.swift; sourceTree = "<group>"; };
 		544CB7114CCC3AFD1C56AEBD /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		6A1EBF6BC6B0E55F2C85923D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73AC73B776085CC741AE7090 /* CoinStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStore.swift; sourceTree = "<group>"; };
 		7888F3CE7E2D88D08997748C /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		7E2B2B725CFBD3D5861C283D /* FocusSlice.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusSlice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		864A7B1C2E938C28662021D0 /* ExperienceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceStore.swift; sourceTree = "<group>"; };
 		A352E47D58681BE629FF2D3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AB26F535636FF8220E41451F /* BreakPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPromptView.swift; sourceTree = "<group>"; };
+		B048E0C38704627F6294DD78 /* Quest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quest.swift; sourceTree = "<group>"; };
+		BC8A92B39DAA805454A6BAA9 /* Quests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quests.swift; sourceTree = "<group>"; };
 		C62BB66BF7B1B69DA7683FF5 /* FocusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEngine.swift; sourceTree = "<group>"; };
+		CB0650365E81903B22E47911 /* BlockNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockNotifier.swift; sourceTree = "<group>"; };
 		D6F2366EB92CC8D1ABB57639 /* FocusSliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSliceApp.swift; sourceTree = "<group>"; };
+		DDF91094F1743A1A5BBF30A6 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestBoard.swift; sourceTree = "<group>"; };
 		E3ED950FEF27AACBC8AAC01B /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
-		"TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_831707B2-B5D6-482D-9EAB-AFC37B1655D2" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		08993A6005BAFC6D54628CE3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CB0650365E81903B22E47911 /* BlockNotifier.swift */,
+				AB26F535636FF8220E41451F /* BreakPromptView.swift */,
+				0B976461D3698E84E0FFF277 /* BreakView.swift */,
+				73AC73B776085CC741AE7090 /* CoinStore.swift */,
 				A352E47D58681BE629FF2D3E /* ContentView.swift */,
+				864A7B1C2E938C28662021D0 /* ExperienceStore.swift */,
 				C62BB66BF7B1B69DA7683FF5 /* FocusEngine.swift */,
 				D6F2366EB92CC8D1ABB57639 /* FocusSliceApp.swift */,
 				7888F3CE7E2D88D08997748C /* FocusView.swift */,
+				DDF91094F1743A1A5BBF30A6 /* Levels.swift */,
 				544CB7114CCC3AFD1C56AEBD /* Models.swift */,
 				47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */,
 				E3ED950FEF27AACBC8AAC01B /* PlanView.swift */,
+				B048E0C38704627F6294DD78 /* Quest.swift */,
+				E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */,
+				BC8A92B39DAA805454A6BAA9 /* Quests.swift */,
 				36D497AF4620EB6F17673852 /* ReviewView.swift */,
 			);
 			path = Sources;
@@ -57,15 +86,16 @@
 		A71204F706557AF731E10466 = {
 			isa = PBXGroup;
 			children = (
+				6A1EBF6BC6B0E55F2C85923D /* Assets.xcassets */,
 				08993A6005BAFC6D54628CE3 /* Sources */,
 				940B7F41F0A5E565F4D1AF6E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_89ADAFD0-04C6-4E04-B7CC-252070245DCE" /* ios */ = {
+		"TEMP_983C87EB-4D19-4FA7-B3F1-FD0008F911E0" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */,
+				"TEMP_831707B2-B5D6-482D-9EAB-AFC37B1655D2" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -78,6 +108,7 @@
 			buildConfigurationList = 4841A4D669C85C7851B60666 /* Build configuration list for PBXNativeTarget "FocusSlice" */;
 			buildPhases = (
 				9457088C5B6282647AB377C2 /* Sources */,
+				A223F6B901F5D01925689AF9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -123,18 +154,38 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A223F6B901F5D01925689AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A032E175F1F93B91D796E9C3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9457088C5B6282647AB377C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B91063D0615D7DA61FBE3402 /* BlockNotifier.swift in Sources */,
+				60927EE72B1D85A67F3643C7 /* BreakPromptView.swift in Sources */,
+				AEBDFBC19D4AC6B7DD0322A0 /* BreakView.swift in Sources */,
+				ADD9B34CB7254D6F05CBA4BE /* CoinStore.swift in Sources */,
 				45A7DDD489FB633F9C168D71 /* ContentView.swift in Sources */,
+				556C3676D78EC921DE49AF8C /* ExperienceStore.swift in Sources */,
 				FEE683B477FCF6C1A5081226 /* FocusEngine.swift in Sources */,
 				E3C29ACE328E4BF4C90890DF /* FocusSliceApp.swift in Sources */,
 				1B883FE417927688C96F07BC /* FocusView.swift in Sources */,
+				A30E5EA37E55BA916EE1799D /* Levels.swift in Sources */,
 				D077EAC2F3F2AF628ED74B09 /* Models.swift in Sources */,
 				DB7CAE4CF43F814B4B6B1238 /* MotionDetector.swift in Sources */,
 				9DB3F29145820CB39F12D213 /* PlanView.swift in Sources */,
+				2AE34C9320CAEBB26EF7547F /* Quest.swift in Sources */,
+				B19B6ACDFCD8C4B8E0EAEDDB /* QuestBoard.swift in Sources */,
+				C126A4349E13116DA5EDE91D /* Quests.swift in Sources */,
 				D3ECA2B4125051EB8CD33630 /* ReviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,9 +261,10 @@
 		};
 		4C7BEB054887AD09F8746349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_831707B2-B5D6-482D-9EAB-AFC37B1655D2" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -292,9 +344,10 @@
 		};
 		C2C4CE9010EE9AD21ED46767 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_ACA8BA93-AC18-4A8F-A643-8AF876864A42" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_831707B2-B5D6-482D-9EAB-AFC37B1655D2" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

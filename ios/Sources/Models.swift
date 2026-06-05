@@ -13,6 +13,10 @@ struct BlockTemplate: Identifiable, Hashable {
     /// Focus length in seconds.
     var focusDuration: TimeInterval { TimeInterval(focusMinutes * 60) }
 
+    /// Full break length in seconds. The actual break can be shortened when a
+    /// focus block is ended early (see `FocusEngine.breakLength(forCompletedFocus:)`).
+    var breakDuration: TimeInterval { TimeInterval(breakMinutes * 60) }
+
     static let presets: [BlockTemplate] = [
         BlockTemplate(name: "Quick test", focusMinutes: 1, breakMinutes: 1),
         BlockTemplate(name: "Pomodoro", focusMinutes: 25, breakMinutes: 5),
@@ -55,5 +59,7 @@ struct DistractionEvent: Identifiable {
 enum SessionState {
     case planning
     case focusing
+    case breakPrompt  // focus is done; the break is offered, not imposed
+    case onBreak
     case review
 }
