@@ -288,8 +288,11 @@ after the engine and recap have proven themselves on real Chronicle data.
 
 ### Break recap (after each taken break, skippable)
 
-When a break ends (only a real one — skipped breaks get no recap), the review
-screen opens with one row of bubbles: *"What did you get up to?"*
+When a break ends (only a real one — skipped breaks get no recap), the recap
+gets **its own moment between break and review** (decided — §10 #3): one
+light screen asking *"What did you get up to?"*, in the same spirit as the
+pre-focus Hydrate sheet. Continue lands on the review; Skip is just as easy
+and lands in the same place.
 
 The full bubble vocabulary is the recap column of the axis table (§5), plus
 the no-axis honesty bubble *scrolled my phone*. Showing twenty-odd bubbles
@@ -298,9 +301,10 @@ most-tapped, two drawn from the sleepiest axes (the nudge surface working
 quietly — §8), and *scrolled my phone* — with a "more…" chip expanding the
 rest.
 
-Tap up to 3, or ignore it — it's a section of the review screen, not a modal
-gate. No coins (pillar 5); each tap is one mark. The bubble list is one
-data table, easy to extend.
+Because this moment stands between the player and their score, it must stay
+feather-light forever: bubbles, Continue, Skip — it never grows questions,
+text fields, or a second step. Tap up to 3 or skip; no coins (pillar 5);
+each tap is one mark. The bubble list is one data table, easy to extend.
 
 ### Existing automatic signals (no new interaction)
 
@@ -349,8 +353,8 @@ Mind needs no nudge; the core loop is the Mind nudge.
    ladder — and the freed "Sage" now sits in the Mind+Heart cell.)
 2. **Quiz timing.** Resolved: after the first review, never at install, with
    the head-start-but-skippable pitch (§7); built last, at the ship pass.
-3. **Recap placement.** Top of the review screen (proposed) vs. its own
-   moment between break and review?
+3. **Recap placement.** Resolved: its own moment between break and review —
+   a dedicated, feather-light screen (bubbles · Continue · Skip), per §7.
 4. **Hybrid gate.** Ladder ≥ 3 to show hybrids — right bar? Alternative: gate
    on total marks instead of level.
 5. **Pursue-a-class pin** (explicit switching) — v2 as proposed, or v1?
@@ -388,8 +392,9 @@ one data table per concept:
   axis-specific is allowed to leak into views or control flow. The Chronicle
   stores raw activity kinds, not axis totals, so old entries re-score
   correctly when mappings or axes change later.
-- `BreakRecapView` (review-screen section), `LifestyleQuizView` (one screen
-  after the first review — built last, see the §7 build note), and a
-  one-line change to the plan badge.
+- `BreakRecapView` (its own screen between break and review — a new stop in
+  the engine's state flow or a sheet over review, whichever stays lighter),
+  `LifestyleQuizView` (one screen after the first review — built last, see
+  the §7 build note), and a one-line change to the plan badge.
 - Nothing touches `FocusEngine` — the class layer can ship, change, or be
   deleted without entering block logic.
