@@ -229,7 +229,24 @@ fantasy pose while holding modern life — that's the system's whole joke
 (your real week, painted as legend), so the art carries it too.
 
 Briefs are one more roster column (pillar 6): a class isn't done without its
-why-line and its art brief. Not v1 scope (§9) — these wait for the art pass.
+why-line and its art brief. Not v1 scope (§9) — these wait for the art pass,
+whether that's hand-drawn or AI-generated.
+
+**Prompt template** (style guide + brief, ready for an image model — keep it
+identical across all 30 so the set stays consistent, varying only the
+bracketed parts):
+
+> Full-body [CLASS] figure: [BRIEF]. Loose ink-and-wash character study in
+> the style of a worn RPG manual page — warm sepia linework, visible
+> brushwork, aged-parchment background, soft ground shadow, no other
+> scenery. A single flat [TINT] accent color. Modern everyday objects
+> carried as fantasy equipment. Strong readable silhouette, figure centered
+> and fully in frame. No photorealism, no full color, no text, no busy
+> background.
+
+Consistency is the hard part of a generated set: reuse the template
+verbatim, and where the tool supports it, pin a style reference (the first
+accepted image) for the remaining 29.
 
 | Class | Figure brief |
 |---|---|
