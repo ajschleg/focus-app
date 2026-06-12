@@ -31,6 +31,12 @@ their ladder level to form a title: **"Novice Warrior", "Journeyman Monk",
    **no coins** — they only feed the class. Where there's no reward, there's
    no incentive to lie, so the portrait stays honest and the recap stays
    guilt-free.
+6. **Built to grow.** The roster will deepen as the app does — new
+   activities, axes, classes, epithets. So extensibility is a hard
+   requirement of the implementation, not a nice-to-have: adding a class or
+   even a whole axis must be a data-table edit (a new row, a new activity
+   mapping), never a logic change. The 29 titles below are a starting cast,
+   not the cap.
 
 ### Why breaks carry the class
 
@@ -298,6 +304,13 @@ one data table per concept:
 - `ClassEngine` — pure function `(chronicle, date) → title`; roster, axis
   mappings, and every threshold in **one table** (`ClassDefinition.roster`),
   exactly like `FocusLevel.ladder`.
+- **Extensibility is the acceptance test (pillar 6).** Adding a new activity
+  bubble, a new class, or a whole new axis must each be a one-table edit:
+  activities declare their axis, classes declare their axis (or axis pair)
+  and thresholds, and the engine derives everything else — nothing
+  axis-specific is allowed to leak into views or control flow. The Chronicle
+  stores raw activity kinds, not axis totals, so old entries re-score
+  correctly when mappings or axes change later.
 - `BreakRecapView` (review-screen section), `OnboardingQuizView` (one
   screen), and a one-line change to the plan badge.
 - Nothing touches `FocusEngine` — the class layer can ship, change, or be
