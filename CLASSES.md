@@ -205,7 +205,13 @@ deliberately not in v1 until drift proves too slow or too fast.)
 
 ## 7. Feeding the Chronicle
 
-### Onboarding quiz (first launch, one screen, skippable)
+### The lifestyle quiz (after the first review, one screen, skippable)
+
+Deliberately **not** on first launch — install-time questionnaires are
+exactly the thing people bounce off (and there's no account here to hang one
+on). It appears once, right after the player's **first review screen**:
+they've just watched a block turn into a score, so "the app turns how you
+live into a class" finally has context.
 
 "What do you do in your free time?" — pick up to 3 chips:
 
@@ -214,11 +220,31 @@ deliberately not in v1 until drift proves too slow or too fast.)
 > & writing · DIY & crafts · friends & family · time with pets · cooking &
 > baking · tidying & home projects · gardening & plants · hiking & nature
 
-(Two chips per axis, fourteen total — still one screen, still pick up to 3.)
+(Two chips per axis, fourteen total — one screen.)
 
-Each chip seeds ~3 marks on its axis — a two-week head start that **decays
-like any other mark**, so the quiz biases the opening portrait and then real
-behavior takes over. Skip → zero marks → Wanderer. Asked once, never again.
+**The pitch matters more than the screen.** It has to say why the quiz is
+worth ten seconds *and* that skipping is genuinely fine — both at once.
+Draft copy (for sign-off):
+
+> **Give your story a head start.**
+> FocusSlice quietly turns how you live — focus, breaks, free time — into an
+> RPG class. Pick what already fills your free time and your class gets a
+> two-week head start. Skip it and nothing is lost: your habits will paint
+> the same portrait, just a little slower. (Stays on your phone, like
+> everything else.)
+>
+> *Done* · *Skip — my habits can speak for themselves*
+
+Each chip seeds ~3 marks on its axis — a head start that **decays like any
+other mark**, so the quiz biases the opening portrait and then real behavior
+takes over. That decay is also why the "skipping is fine" line is honest,
+not soft-pedaling: takers and skippers converge on the same class within a
+couple of weeks; skippers just wear Wanderer a little longer. Asked once,
+never again.
+
+Build note: the quiz only matters at install time, so it's **ship-blocking,
+not prototype-blocking** — it's the last piece of this feature to build,
+after the engine and recap have proven themselves on real Chronicle data.
 
 ### Break recap (after each taken break, skippable)
 
@@ -275,8 +301,8 @@ Mind needs no nudge; the core loop is the Mind nudge.
    Innkeeper, and the default Wanderer. (Resolved: the ladder is guild ranks,
    Novice → Paragon, so a Monk class no longer clashes with a monk-themed
    ladder — and the freed "Sage" now sits in the Mind+Heart cell.)
-2. **Quiz timing.** First launch is one more screen before the first block —
-   acceptable, or defer to after the first review?
+2. **Quiz timing.** Resolved: after the first review, never at install, with
+   the head-start-but-skippable pitch (§7); built last, at the ship pass.
 3. **Recap placement.** Top of the review screen (proposed) vs. its own
    moment between break and review?
 4. **Hybrid gate.** Ladder ≥ 3 to show hybrids — right bar? Alternative: gate
@@ -311,7 +337,8 @@ one data table per concept:
   axis-specific is allowed to leak into views or control flow. The Chronicle
   stores raw activity kinds, not axis totals, so old entries re-score
   correctly when mappings or axes change later.
-- `BreakRecapView` (review-screen section), `OnboardingQuizView` (one
-  screen), and a one-line change to the plan badge.
+- `BreakRecapView` (review-screen section), `LifestyleQuizView` (one screen
+  after the first review — built last, see the §7 build note), and a
+  one-line change to the plan badge.
 - Nothing touches `FocusEngine` — the class layer can ship, change, or be
   deleted without entering block logic.
