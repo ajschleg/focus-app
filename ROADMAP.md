@@ -13,10 +13,9 @@
 - [x] Quests & coin earning
 - [ ] Classes
 - [ ] Currency (the spend side)
-- [ ] Friends
 - [ ] Art
 
-**5 / 9 complete.**
+**5 / 8 complete.**
 
 ## Features
 
@@ -58,11 +57,17 @@ Long rest (buy a longer break) and the Courtyard — a code-drawn place built
 fixture by fixture, CONCEPT.md §5B at its smallest size. Spec in
 CURRENCY.md; prices and fixture names still draft.
 
-### Friends — Not started
-Needs concept work: what "friends" means here (shared presence? co-focus
-blocks? seeing each other's titles?) is undecided. Constraint to honor from
-CLASSES.md §13: nothing leaderboard-shaped — the portrait is personal, so
-friends should be company, not comparison.
+## Cut from v1
+
+### Friends — Deferred, possibly permanently
+Dropped (June 2026): a real friend system means accounts, a server, push
+infrastructure, moderation, and the end of the "stays on your phone" story
+the other features lean on — the biggest feature in the app, before the
+single-player loop has proven itself. Revisit only if the app sells well,
+and then from the cheap end first: share cards and SharePlay co-focus
+(borrowing the phone's existing social graph — company, not comparison,
+per CLASSES.md §13) before any persistent friend graph (CloudKit sharing,
+then a backend, in that order).
 
 ### Art — Not started (style guide ready)
 Replace placeholder SF symbols with real artwork: the ten ladder ranks and
