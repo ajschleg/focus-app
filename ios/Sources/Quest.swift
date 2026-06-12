@@ -36,6 +36,9 @@ class Quest: ObservableObject, Identifiable {
     /// The quest's own color, for surfaces it gets to itself (the pre-focus
     /// sheet) — water blue for hydration, etc. nil = follow the level tint.
     let tint: Color?
+    /// What completing this quest writes to the Chronicle (the class
+    /// system's history) — nil for quests that shouldn't leave a mark.
+    let activity: ActivityKind?
 
     /// Self-reported quests are completed by the user tapping "Done" — the
     /// honor-system habits (water, stretching) no sensor can verify.
@@ -49,13 +52,14 @@ class Quest: ObservableObject, Identifiable {
     @Published private(set) var status: Status = .offered
 
     init(title: String, detail: String, reward: Int, placement: Placement,
-         systemImage: String, tint: Color? = nil) {
+         systemImage: String, tint: Color? = nil, activity: ActivityKind? = nil) {
         self.title = title
         self.detail = detail
         self.reward = reward
         self.placement = placement
         self.systemImage = systemImage
         self.tint = tint
+        self.activity = activity
     }
 
     // MARK: - Lifecycle hooks (called by QuestBoard; defaults do nothing)

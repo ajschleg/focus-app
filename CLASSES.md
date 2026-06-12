@@ -260,7 +260,13 @@ roster should prove itself first.
    class changes on evidence of a changed life, never on absence.*
    Exception: leaving Wanderer is instant — the first class should land the
    moment it's earned. The same held clock guards the slide *back* to
-   Wanderer when every axis fades.
+   Wanderer when every axis fades — and that slide waits **five** active
+   days instead of three, longer than a daily-mark axis needs to re-wake,
+   so returning to the same life after an absence never strips the title in
+   passing. The hold compares player-visible **titles**: a hybrid's
+   dominant axis may trade places day to day (Monk is Monk whichever axis
+   leads) without resetting the streak; dominance still updates silently
+   for below-gate rendering.
 5. **Gate changes are instant; drift changes are held.** Hysteresis governs
    affinity-driven changes only. Crossing the hybrid gate (promotion to
    Journeyman) re-renders the title immediately, and a demotion below it
@@ -527,7 +533,8 @@ numbers without quietly rerouting someone's identity.
   axis.
 - Exactly-equal affinities → incumbent keeps the class; fresh ties resolve
   by lifetime marks, then §5 table order. Same input, same title, always.
-- All axes fade below the awake bar → Wanderer only after the 3-day hold.
+- All axes fade below the awake bar → Wanderer only after the
+  five-active-day Wanderer hold (honesty bubbles count as active days).
 
 ## 13. Depth roadmap (decided, post-v1)
 

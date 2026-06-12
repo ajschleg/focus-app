@@ -21,7 +21,11 @@ targets:
       - path: Sources
       # App icon lives here; regenerate it with ios/Tools/make-app-icon.swift.
       - path: Assets.xcassets
-    scheme: {}   # generate a shared scheme so a clean clone can build without Xcode autocreating one
+    # Shared scheme so a clean clone can build without Xcode autocreating
+    # one; ⌘U runs the ClassEngine suite (CLASSES.md §12).
+    scheme:
+      testTargets:
+        - FocusSliceTests
     entitlements:
       # Time-sensitive lets the phase-end notifications break through
       # Focus/DND modes (and the Scheduled Summary) — a timer the user
@@ -55,3 +59,17 @@ targets:
         INFOPLIST_KEY_NSMotionUsageDescription: "FocusSlice reads device motion to detect when you pick up your phone during a focus block, so it can log it as a distraction."
         INFOPLIST_KEY_NSHealthShareUsageDescription: "FocusSlice reads your workouts so the daily exercise quest completes automatically when you log one."
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+
+  # Unit tests — the CLASSES.md §12 suite over the pure ClassEngine.
+  FocusSliceTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Tests
+    dependencies:
+      - target: FocusSlice
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "YES"
+        PRODUCT_BUNDLE_IDENTIFIER: com.ajschleg.FocusSliceTests

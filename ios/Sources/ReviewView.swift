@@ -5,6 +5,11 @@ struct ReviewView: View {
     @EnvironmentObject private var experience: ExperienceStore
     @EnvironmentObject private var board: QuestBoard
 
+    /// The break recap (CLASSES.md §7): its own moment between a *taken*
+    /// break and the review — presented the instant review appears, only
+    /// when a real break happened. Swiping it away is the Skip.
+    @State private var showRecap = false
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
@@ -108,6 +113,11 @@ struct ReviewView: View {
             .padding(.horizontal)
             .padding(.vertical, 8)
             .background(.ultraThinMaterial)
+        }
+        .onAppear { showRecap = engine.completedBreak > 0 }
+        .sheet(isPresented: $showRecap) {
+            BreakRecapView()
+                .presentationDetents([.medium, .large])
         }
     }
 
@@ -341,4 +351,5 @@ private struct BreakSummary: View {
         .environmentObject(engine)
         .environmentObject(experience)
         .environmentObject(QuestBoard(engine: engine, coins: CoinStore(), workouts: WorkoutMonitor()))
+        .environmentObject(ChronicleStore(filename: nil))
 }

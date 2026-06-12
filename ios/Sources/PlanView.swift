@@ -6,6 +6,7 @@ struct PlanView: View {
     @EnvironmentObject private var coins: CoinStore
     @EnvironmentObject private var board: QuestBoard
     @EnvironmentObject private var notifier: BlockNotifier
+    @EnvironmentObject private var classes: ClassStore
 
     /// The pre-focus quest being prompted (sheet) between tapping "Start
     /// focus" and the block actually starting.
@@ -24,7 +25,11 @@ struct PlanView: View {
                 }
                 .padding(.top, 40)
 
-                LevelBadge(experience: experience)
+                LevelBadge(experience: experience, classes: classes)
+
+                if let shift = classes.shift {
+                    PathShiftCard(from: shift.from, to: shift.to) { classes.shiftSeen() }
+                }
 
                 HStack(spacing: 8) {
                     StatChip(text: "\(experience.total) XP", systemImage: "sparkles", tint: .secondary)
@@ -110,6 +115,16 @@ struct PlanView: View {
                 engine.startFocus()
             }
             .presentationDetents([.height(340)])
+        }
+        // The one full-screen moment the class system takes: the first
+        // class ever (CLASSES.md §9). Later shifts are the quiet card above.
+        .fullScreenCover(isPresented: Binding(
+            get: { classes.ceremony != nil },
+            set: { if !$0 { classes.ceremonySeen() } }
+        )) {
+            FirstClassCeremonyView(focusClass: classes.ceremony ?? classes.current) {
+                classes.ceremonySeen()
+            }
         }
     }
 
@@ -202,9 +217,14 @@ private struct PreFocusQuestSheet: View {
 }
 
 /// The current rung of the guild ladder: placeholder artwork in the level's
-/// tint, the target to beat, and live promotion/demotion progress.
+/// tint, the full title (rank + class), the target to beat, and live
+/// promotion/demotion progress. The ⓘ answers "why this title?" with the
+/// class's why-line plus receipts from the Chronicle.
 private struct LevelBadge: View {
     @ObservedObject var experience: ExperienceStore
+    @ObservedObject var classes: ClassStore
+
+    @State private var showWhy = false
 
     var body: some View {
         let level = experience.level
@@ -217,8 +237,22 @@ private struct LevelBadge: View {
                     .font(.system(size: 36))
                     .foregroundStyle(level.tint)
             }
-            Text("Level \(experience.levelNumber) · \(level.name)")
-                .font(.headline)
+            HStack(spacing: 6) {
+                Text("Level \(experience.levelNumber) · \(level.name) \(classes.current.name)")
+                    .font(.headline)
+                Button {
+                    showWhy = true
+                } label: {
+                    Image(systemName: "info.circle")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .popover(isPresented: $showWhy) {
+                    ClassWhyCard(classes: classes)
+                        .presentationCompactAdaptation(.popover)
+                }
+            }
             Text(progressLine)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -240,6 +274,67 @@ private struct LevelBadge: View {
             return "The top of the guild. Score \(level.targetScore)+ to hold the title."
         }
         return "Score \(level.targetScore)+ in a block · \(experience.wins)/\(level.winsToPromote) toward \(next.name)"
+    }
+}
+
+/// The ⓘ popover: why-line from the roster, then receipts generated from
+/// the Chronicle — personal evidence, not canned copy. What it says about
+/// the *level* half of the title is still open (CLASSES.md §10), so it
+/// speaks only for the class.
+private struct ClassWhyCard: View {
+    @ObservedObject var classes: ClassStore
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(classes.current.name, systemImage: classes.current.systemImage)
+                .font(.headline)
+            Text(classes.current.whyLine)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            if !classes.receipts.isEmpty {
+                Text("Driven by " + classes.receipts.joined(separator: " · "))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            if classes.isQuiet {
+                Text("Your Chronicle has been quiet lately — this title holds until new evidence arrives.")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .padding()
+        .frame(width: 300, alignment: .leading)
+    }
+}
+
+/// The quiet drift announcement (CLASSES.md §9): no modal, no fanfare —
+/// a dismissible row that waits on the plan screen.
+private struct PathShiftCard: View {
+    let from: String
+    let to: String
+    let dismiss: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "arrow.triangle.branch")
+                .font(.title3)
+                .foregroundStyle(.tint)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Your path has shifted")
+                    .font(.subheadline.weight(.semibold))
+                Text("\(from) → \(to)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            Button(action: dismiss) {
+                Image(systemName: "xmark")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding()
+        .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
     }
 }
 
@@ -363,6 +458,7 @@ private struct TemplateRow: View {
     let notifier = BlockNotifier()
     let workouts = WorkoutMonitor()
     let engine = FocusEngine(experience: experience, notifier: notifier)
+    let chronicle = ChronicleStore(filename: nil)
     PlanView()
         .environmentObject(engine)
         .environmentObject(experience)
@@ -370,4 +466,6 @@ private struct TemplateRow: View {
         .environmentObject(QuestBoard(engine: engine, coins: coins, workouts: workouts))
         .environmentObject(notifier)
         .environmentObject(workouts)
+        .environmentObject(chronicle)
+        .environmentObject(ClassStore(chronicle: chronicle, experience: experience))
 }

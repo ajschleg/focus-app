@@ -8,6 +8,7 @@ struct ContentView: View {
     @EnvironmentObject private var notifier: BlockNotifier
     @EnvironmentObject private var board: QuestBoard
     @EnvironmentObject private var workouts: WorkoutMonitor
+    @EnvironmentObject private var classes: ClassStore
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -43,6 +44,7 @@ struct ContentView: View {
                 notifier.refreshStatus()
                 workouts.refresh()
                 board.refreshOffers()
+                classes.refresh()   // a new day may have dawned on the title
             }
         }
     }
@@ -69,6 +71,7 @@ private struct LevelBackground: View {
     let notifier = BlockNotifier()
     let workouts = WorkoutMonitor()
     let engine = FocusEngine(experience: experience, notifier: notifier)
+    let chronicle = ChronicleStore(filename: nil)
     ContentView()
         .environmentObject(engine)
         .environmentObject(experience)
@@ -76,4 +79,6 @@ private struct LevelBackground: View {
         .environmentObject(QuestBoard(engine: engine, coins: coins, workouts: workouts))
         .environmentObject(notifier)
         .environmentObject(workouts)
+        .environmentObject(chronicle)
+        .environmentObject(ClassStore(chronicle: chronicle, experience: experience))
 }

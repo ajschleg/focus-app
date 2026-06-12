@@ -82,6 +82,19 @@ per pattern:
   `UserDefaults`, so it reappears each new day. To test in the Simulator:
   Health app → Browse → Activity → Workouts → Add Data.
 
+On top of everything sits the **class system** (CLASSES.md — the spec):
+`ChronicleStore` keeps an append-only local log of finished blocks, quest
+completions, and break-recap taps; the pure `ClassEngine` replays it into a
+title — seven decaying affinity axes, 29 classes plus the Ascetic epithet,
+hysteresis on an active-days clock — and `ClassStore` publishes the result.
+The class joins the ladder rank on the plan badge ("Journeyman Warrior"),
+the ⓘ beside it answers *why* with receipts from the Chronicle, a taken
+break is followed by the recap bubbles (no coins — they only feed the
+Chronicle), and the first class ever earns a one-time full-screen ceremony.
+Nothing in the class layer touches `FocusEngine`. The engine's rules are
+pinned by `ios/Tests/ClassEngineTests.swift` (CLASSES.md §12) — run with
+⌘U, or `xcodebuild test -scheme FocusSlice`.
+
 ## Signals (entitlement-free v1 fusion)
 
 | Signal | How | Where |

@@ -31,8 +31,8 @@
 | **Move your body** | Automatic (HealthKit) | Quest board row on days it hasn't been earned yet; completes the moment any workout with today's end date syncs in. While open, the break prompt suggests taking the break as a short walk. | 30 | Body +2 | "Finish any workout today. Completes on its own when Health logs one." |
 | **Standing focus** *(planned — not yet built)* | Daily draw, opt-in | Appears on the quest board at random, at most once a day; accept before starting a block to arm it for that block. Judged at block end against Apple Watch stand minutes overlapping the block (HealthKit `appleStandTime`). | 20 | Body +1 | "Stay on your feet for this whole block." |
 
-Affinity notes: marks land in the Chronicle when a quest completes — live
-once the classes feature ships (CLASSES.md §4). Verified signals mark
+Affinity notes: marks land in the Chronicle when a quest completes (live —
+each quest declares its `activity` kind; CLASSES.md §4). Verified signals mark
 double (hence Body +2); self-reports mark single, which keeps lying
 low-stakes (CLASSES.md pillar 5 applies to recap bubbles, which pay no
 coins at all — quests pay coins because three of the four are sensor- or

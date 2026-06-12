@@ -183,7 +183,8 @@ final class QuestBoard: ObservableObject {
                                   reward: 5,
                                   placement: .preFocus,
                                   systemImage: "drop.fill",
-                                  tint: .blue))
+                                  tint: .blue,
+                                  activity: .questHydrate))
         }
         if !quests.contains(where: { $0 is CleanSweepQuest }) {
             adopt(CleanSweepQuest())

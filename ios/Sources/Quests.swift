@@ -30,7 +30,8 @@ final class CleanSweepQuest: Quest {
                    detail: "Finish your next block with zero distractions.",
                    reward: 25,
                    placement: .menu,
-                   systemImage: "checkmark.seal.fill")
+                   systemImage: "checkmark.seal.fill",
+                   activity: .questCleanSweep)
     }
 
     override func distractionRecorded(_ event: DistractionEvent) {
@@ -69,7 +70,8 @@ final class ExerciseQuest: Quest {
                    reward: 30,
                    placement: .menu,
                    systemImage: "figure.walk",
-                   tint: .mint)
+                   tint: .mint,
+                   activity: .questExercise)
     }
 
     override func workoutLogged(endedAt date: Date) {
@@ -109,7 +111,8 @@ final class StillnessQuest: Quest {
                    detail: "Hands off the phone for the next \(Self.lengthString(duration)).",
                    reward: reward,
                    placement: .focus,
-                   systemImage: "hand.raised.fill")
+                   systemImage: "hand.raised.fill",
+                   activity: .questStillness)
     }
 
     override func focusTicked(elapsed: TimeInterval, remaining: TimeInterval) {

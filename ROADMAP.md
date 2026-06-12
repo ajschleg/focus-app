@@ -44,12 +44,13 @@ The quest board pays focus coins: Hydrate (pre-focus), Clean sweep (opt-in),
 Stillness check (mid-block surprise), and Move your body (HealthKit-verified
 daily exercise, with the break-prompt walk nudge).
 
-### Classes — Design complete, not started
+### Classes — In progress (core shipped; quiz remains)
 The passive RPG identity: seven decaying affinity axes fed by the Chronicle
 turn how you live into a title (29 classes + the Ascetic epithet) beside
-your ladder rank. Spec agreed in CLASSES.md; build order: Chronicle →
-ClassEngine (+ §12 tests) → break recap → badge/ⓘ → first-class ceremony,
-with the lifestyle quiz last as the ship gate.
+your ladder rank. Shipped: Chronicle, ClassEngine with the 18-test §12
+suite, break recap, badge + ⓘ receipts, first-class ceremony, shift card.
+Remaining: the lifestyle quiz (deliberately last — the ship gate) and the
+level half of the ⓘ popover (CLASSES.md §10 #11).
 
 ### Currency (the spend side) — Design complete, not started
 Coins currently only accumulate. v1 adds per-minute earning and two sinks:
