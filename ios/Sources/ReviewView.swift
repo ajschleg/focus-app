@@ -255,7 +255,7 @@ private struct LevelVerdict: View {
             return "Score \(level.targetScore)+ to climb back."
         case .stayed:
             if outcome.metTarget {
-                guard let next = experience.nextLevel else { return "Holding the summit." }
+                guard let next = experience.nextLevel else { return "Holding the title." }
                 return "\(experience.wins)/\(level.winsToPromote) wins toward \(next.name)"
             } else {
                 guard let previous = experience.previousLevel else { return "No demotion at level 1 — keep climbing." }

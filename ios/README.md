@@ -34,14 +34,14 @@ Each block's final score is banked as **XP** when it reaches review
 (`ExperienceStore`, persisted in `UserDefaults`) — the first sliver of the
 reward economy (CONCEPT.md §5).
 
-On top of XP sits the **monk's ladder** (CONCEPT.md §5D, in the spirit of
-Apex/Siege ranked): ten levels, each with a name, placeholder artwork, an
-app-wide tint, a per-block target score, and promotion/demotion rules. Score
-at-or-above the target `winsToPromote` times to climb; fall below it
-`missesToDemote` times to drop a level (level 1 is the floor; counters reset
-on any level change, and a full winning streak at the top level "holds the
-summit" — it wipes both counters so slips can't ratchet toward an inevitable
-demotion). Climbing gets harder as you rise — targets go 50 → 92
+On top of XP sits the **guild ladder** (CONCEPT.md §5D, in the spirit of
+Apex/Siege ranked): ten levels (Novice → Paragon), each with a name,
+placeholder artwork, an app-wide tint, a per-block target score, and
+promotion/demotion rules. Score at-or-above the target `winsToPromote` times
+to climb; fall below it `missesToDemote` times to drop a level (level 1 is
+the floor; counters reset on any level change, and a full winning streak at
+the top level "holds the title" — it wipes both counters so slips can't
+ratchet toward an inevitable demotion). Climbing gets harder as you rise — targets go 50 → 92
 and the required win streak 2 → 6. First-time promotions pay focus coins
 (20 → 300, paid for the *destination* level); re-reaching a level after a
 demotion pays nothing, so bouncing can't farm coins. **Every knob lives in one table: `FocusLevel.ladder` in `Levels.swift`.**

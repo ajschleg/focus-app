@@ -1,6 +1,6 @@
 import Foundation
 
-/// How one reviewed block moved the player on the monk's ladder — built by
+/// How one reviewed block moved the player on the guild ladder — built by
 /// `ExperienceStore.recordBlock`, read by the review screen.
 struct LevelOutcome {
     enum Movement: Equatable {
@@ -95,7 +95,7 @@ final class ExperienceStore: ObservableObject {
                     movement = .promoted(coinsAwarded: paid)
                 }
             } else if wins >= level.winsToPromote {
-                // Summit held: with no promotion to spend the streak on, it
+                // Title held: with no promotion to spend the streak on, it
                 // wipes the slate instead — otherwise misses would ratchet
                 // one-way toward a guaranteed demotion, and the banked wins
                 // would pay out a spurious instant promotion if the ladder

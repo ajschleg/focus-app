@@ -9,8 +9,8 @@
 
 A passive RPG class — **Warrior, Scholar, Artisan…** — computed from what the
 player actually does (focus blocks, quests, break activities), appended to
-their ladder level to form a title: **"Novice Warrior", "Disciple Monk",
-"Enlightened Innkeeper."**
+their ladder level to form a title: **"Novice Warrior", "Journeyman Monk",
+"Paragon Innkeeper."**
 
 ## 2. Design pillars
 
@@ -59,19 +59,20 @@ class keeps tracking life rather than diligent tapping.
 
 ## 3. The two tracks: ladder × class
 
-The existing monk's ladder (CONCEPT.md §5D, `Levels.swift`) is untouched — it
+The guild ladder (CONCEPT.md §5D, `Levels.swift`) keeps its mechanics — it
 stays the **performance** track (how well you focus). The class is the new
 **identity** track (what your life looks like). They combine only in the
 title:
 
 ```
 [ladder level name] [class name]
-Novice Warrior · Initiate Scholar · Pilgrim Wizard · Master Keeper
+Novice Warrior · Apprentice Scholar · Journeyman Wizard · Paragon Keeper
 ```
 
-Naming constraint: ladder names are reserved words (Novice, Initiate,
-Disciple, Pilgrim, Adept, Ascetic, **Sage**, Elder, Master, Enlightened) — no
-class may reuse one, which is why there is no Sage class below.
+The ladder uses **guild ranks** (decided): Novice, Apprentice, Journeyman,
+Adept, Veteran, Expert, Master, Grandmaster, Luminary, Paragon. These are
+reserved words no class may reuse — the rename away from the old monk theme
+freed "Sage" for the roster and un-clashed the Monk class.
 
 ## 4. The data: the Chronicle
 
@@ -141,30 +142,30 @@ hybrid.
 
 ### Hybrid classes — two axes within 0.6× of each other, both awake
 
-Requires ladder level ≥ 3 (Disciple) — below that the dominant base class
+Requires ladder level ≥ 3 (Journeyman) — below that the dominant base class
 shows. This is the "traverse by level" hook: early game stays simple, hybrids
 read as an earned deepening.
 
 | | **Mind** | **Spirit** | **Craft** | **Heart** | **Hearth** | **Wild** |
 |---|---|---|---|---|---|---|
 | **Body** | Monk | Templar | **Wizard** | Paladin | Blacksmith | Ranger |
-| **Mind** | — | Philosopher | Artificer | Mentor | Alchemist | Naturalist |
+| **Mind** | — | Philosopher | Artificer | Sage | Alchemist | Naturalist |
 | **Spirit** | — | — | Calligrapher | Cleric | Candlekeeper | Shaman |
 | **Craft** | — | — | — | Jester | Tinker | Herbalist |
 | **Heart** | — | — | — | — | Innkeeper | Shepherd |
 | **Hearth** | — | — | — | — | — | Homesteader |
 
-*(Alternatives for contested cells: Templar → Warden · Mentor → Oracle ·
-Cleric → Healer · Candlekeeper → Abbot, Lamplighter · Shaman → Hermit ·
+*(Alternatives for contested cells: Templar → Warden · Sage → Mentor, Oracle
+· Cleric → Healer · Candlekeeper → Abbot, Lamplighter · Shaman → Hermit ·
 Jester → Storyteller, Minstrel · Blacksmith → Squire · Innkeeper → Host.)*
 
 Wizard is the canonical example: lift weights, draw on your breaks → "you
 become a wizard." New favorites fall out naturally: **Alchemist** (deep focus
 + tea ritual), **Calligrapher** (art + stillness), **Homesteader** (cooking +
 garden), **Shepherd** (people + outdoors), **Naturalist** (study + green
-things), **Candlekeeper** (home ritual + quiet). Sample titles: *Disciple
-Monk, Adept Alchemist, Pilgrim Naturalist, Ascetic Calligrapher, Elder
-Homesteader, Enlightened Shaman.*
+things), **Candlekeeper** (home ritual + quiet). Sample titles: *Journeyman
+Monk, Veteran Alchemist, Adept Naturalist, Expert Calligrapher, Grandmaster
+Homesteader, Paragon Shaman.*
 
 All told: 7 base + 21 hybrids + Wanderer = **29 titles**.
 
@@ -254,8 +255,8 @@ Mind needs no nudge; the core loop is the Mind nudge.
 
 ## 9. Where the player sees it
 
-- **Plan screen badge:** "Level 3 · Disciple **Warrior**" — the class simply
-  joins the line that exists today.
+- **Plan screen badge:** "Level 3 · Journeyman **Warrior**" — the class
+  simply joins the line that exists today.
 - **Class change:** a small dismissible card on the plan screen — "Your path
   has shifted: Scholar → Monk." No modal, no fanfare (pillar 2).
 - **v1 stops there.** No class artwork, no perks, no stats screen. Cosmetic
@@ -264,9 +265,10 @@ Mind needs no nudge; the core loop is the Mind nudge.
 
 ## 10. Open questions (for Austin)
 
-1. **Names.** Whole roster is draft — especially Keeper, Mentor, Jester,
-   Innkeeper, and the default Wanderer. And is a **Monk** class too redundant
-   with the monk-themed ladder, or a perfect fit?
+1. **Names.** Whole roster is draft — especially Keeper, Sage, Jester,
+   Innkeeper, and the default Wanderer. (Resolved: the ladder is guild ranks,
+   Novice → Paragon, so a Monk class no longer clashes with a monk-themed
+   ladder — and the freed "Sage" now sits in the Mind+Heart cell.)
 2. **Quiz timing.** First launch is one more screen before the first block —
    acceptable, or defer to after the first review?
 3. **Recap placement.** Top of the review screen (proposed) vs. its own

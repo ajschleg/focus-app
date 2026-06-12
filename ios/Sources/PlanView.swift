@@ -201,7 +201,7 @@ private struct PreFocusQuestSheet: View {
     }
 }
 
-/// The current rung of the monk's ladder: placeholder artwork in the level's
+/// The current rung of the guild ladder: placeholder artwork in the level's
 /// tint, the target to beat, and live promotion/demotion progress.
 private struct LevelBadge: View {
     @ObservedObject var experience: ExperienceStore
@@ -237,7 +237,7 @@ private struct LevelBadge: View {
     private var progressLine: String {
         let level = experience.level
         guard let next = experience.nextLevel else {
-            return "The summit. Score \(level.targetScore)+ to hold the ensō."
+            return "The top of the guild. Score \(level.targetScore)+ to hold the title."
         }
         return "Score \(level.targetScore)+ in a block · \(experience.wins)/\(level.winsToPromote) toward \(next.name)"
     }
