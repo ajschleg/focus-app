@@ -568,6 +568,8 @@ Chronicle that v1 starts writing.
 - **The world bridge (far horizon).** When CONCEPT.md §5B's build-a-world
   hook arrives, classes shape what grows: a Druid's focus raises a grove, a
   Blacksmith's a forge district. Where the label becomes a world-generator.
+  Its first acre ships sooner: the Courtyard (CURRENCY.md §4), whose
+  fixture catalog is the natural place for class-shaped offerings.
 
 **Deliberate non-goals**, recorded so they aren't re-litigated: mechanical
 perks (a class that pays better coins makes self-reports worth lying about —

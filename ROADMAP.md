@@ -52,11 +52,11 @@ your ladder rank. Spec agreed in CLASSES.md; build order: Chronicle →
 ClassEngine (+ §12 tests) → break recap → badge/ⓘ → first-class ceremony,
 with the lifestyle quiz last as the ship gate.
 
-### Currency (the spend side) — Design drafted, not started
-Coins currently only accumulate. v1 adds the sink that closes the economy:
-per-minute earning plus two purchases — Long rest (extend the break) and
-Furlough (pre-armed phone window during focus). Spec in CURRENCY.md,
-awaiting sign-off.
+### Currency (the spend side) — Design complete, not started
+Coins currently only accumulate. v1 adds per-minute earning and two sinks:
+Long rest (buy a longer break) and the Courtyard — a code-drawn place built
+fixture by fixture, CONCEPT.md §5B at its smallest size. Spec in
+CURRENCY.md; prices and fixture names still draft.
 
 ### Friends — Not started
 Needs concept work: what "friends" means here (shared presence? co-focus

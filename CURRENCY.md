@@ -1,33 +1,35 @@
 # FocusSlice — Currency: the spend side (Draft for Review)
 
-> Status: **draft for review — nothing here is implemented.** Companion to
-> CONCEPT.md §5A (the coin economy) and §6 (the break free track). Earning
-> exists today — quests (QUESTS.md) and first-arrival promotion rewards
-> (`FocusLevel.ladder`) — and `CoinStore` is earn-only; this doc designs the
-> sink that closes the loop. All names and prices are draft.
+> Status: **design agreed in direction; prices, names, and the fixture
+> catalog are draft.** Companion to CONCEPT.md §5A (the coin economy), §5B
+> (build-a-world), and §6 (break design). Earning exists today — quests
+> (QUESTS.md) and first-arrival promotion rewards (`FocusLevel.ladder`) —
+> and `CoinStore` is earn-only; this doc designs the sink side.
 
 ## 1. What coins buy (one line)
 
-**Rest and sanctioned indulgence — never the score.** Focus earns coins;
-coins buy longer breaks and pre-planned phone time. The record (score, XP,
-ladder, distraction log) is not for sale.
+**Rest and a place — never the score, never the self.** Focus earns coins;
+coins buy longer breaks and build the Courtyard. The record is not for
+sale, and neither is a better you.
 
 ## 2. Design pillars
 
 1. **Self-balancing (CONCEPT.md §5A).** The loop closes: focused minutes
-   fund rest and indulgence, which make the next block sustainable. Phone
-   use stops being sin and becomes the thing you earned.
+   fund rest and a growing place, which make the next block worth sitting
+   down for.
 2. **Coins never touch the record.** No score erasers, no demotion shields,
-   no log edits. The ladder means something because it can't be bought; a
-   purchase changes what happens *next*, never what already happened.
-3. **Pre-commitment, not forgiveness.** You buy permission *before* the
-   act, never absolution after. Planning an indulgence is discipline;
-   purchasing forgiveness is a slot machine. Every sink obeys this.
+   no log or Chronicle edits. A purchase changes what happens *next*, never
+   what already happened.
+3. **The world, not the self.** The player character *is the user*: score,
+   XP, ladder, and class all measure a real person's real behavior, so any
+   purchasable boost to them is counterfeit by definition. Coins only ever
+   build the world around the player — they never upgrade the player. (This
+   is what ruled out stat-boosting equipment.)
 4. **Ignorable (CONCEPT.md §5's dark-pattern line).** A player who never
-   spends a coin loses nothing but the conveniences. No gameplay is gated
-   behind spending.
-5. **Flat, visible prices.** No randomized rewards, no bundles, no decay.
-   The shop is a price list, not a casino.
+   spends a coin loses nothing but the scenery. Nothing gameplay-critical
+   is gated behind spending, and no sink ever interrupts.
+5. **Flat, visible prices.** No randomized rewards, no bundles, no limited
+   offers. The shop is a price list, not a casino.
 
 ## 3. Income
 
@@ -43,7 +45,7 @@ Feel check: a typical 3–4 block day with a quest or two ≈ **40–60 coins**.
 
 ## 4. The sinks (two in v1)
 
-### Long rest — buy a longer break
+### Long rest — buy a longer break (consumable)
 
 At the break prompt or during the break: **+5 minutes for 10 coins**, up to
 +10 minutes per block. Pure rest — the break credit stays capped at the
@@ -52,78 +54,106 @@ template's full-break value, so an extension can never mint score (pillar
 `breakDuration` and reschedules the break-end notification (cancel +
 reschedule — mind BlockNotifier's matured-trigger race).
 
-### Furlough — pre-planned phone time during focus
+### The Courtyard — coins become a place (permanent)
 
-The §5A signature, built as pre-commitment (pillar 3):
+CONCEPT.md §5B's build-a-world hook at its smallest healthy size: **one
+place, code-drawn, slot-based.** The courtyard of your guild hall *(name
+draft — alts: the Grove, the Garden)*, a single scene that fills in,
+fixture by purchased fixture, as the weeks of focus accumulate.
 
-- **Armed on the plan screen** for **25 coins**, one per block. Arming is
-  the purchase; it's a plan-time decision, not a mid-block temptation.
-- **Invoked during focus** with a deliberately quiet button: opens a
-  **2-minute window** in which leaving the app and pickups are not logged
-  as distractions. The window starts on invocation and is not pausable.
-- **Unused = refunded** at review. An unspent furlough costs nothing, so
-  arming one "just in case" is planning, not waste.
-- **Voids Clean sweep and the clean-block bonus** — clean means clean — and
-  blows an active Stillness check (a furlough is not stillness). The review
-  log shows it neutrally: "furlough taken @ 12:30", its own event kind, not
-  a distraction.
-- The score is untouched: you paid coins instead of points, *in advance*.
+- **Code-drawn, zero image assets.** A parametric SwiftUI scene in ART.md's
+  family — flat shapes, ink-line feel, one accent color (the level tint),
+  light/dark aware — per the `make-app-icon.swift` precedent. Visuals can
+  be upgraded to real illustration later without touching mechanics.
+- **Slots, not a sandbox.** The scene has fixed anchor points that fill as
+  fixtures are bought. No drag-and-drop editor — that's the scope-killer in
+  village builders, and arrangement isn't the fantasy; accumulation is.
+- **Yours, specifically.** Each fixture's rendering varies slightly,
+  seeded by its purchase date — your tree is not anyone else's tree.
+- **It only grows.** Never wilts, never decays, no timers, no FOMO, never
+  interrupts (pillar 4). The Courtyard is accumulated focus made visible —
+  XP you can sit in.
+- **Surfacing:** its own screen, one tap off the plan screen. v1 keeps it
+  one glance deep.
+- **Persistence:** purchased fixture IDs + dates, local like everything.
+- **Future hooks:** classes shape the catalog (the Druid's rare seeds, the
+  Blacksmith's anvil — CLASSES.md §13), and if the full world ever ships,
+  the Courtyard was its first acre.
 
-Why this isn't an eraser: the pass is bought before the block and shown in
-the log after. The score forgives (you paid); the record remembers (it
-happened). Retroactive purchases of any kind stay banned (pillar 3).
+**Fixture catalog (names & prices all draft):**
+
+| Fixture | Price | | Fixture | Price |
+|---|---|---|---|---|
+| Stone path | 20 | | Tree | 80 |
+| Moss rock | 25 | | Herb patch | 90 |
+| Flower bed | 30 | | Wind chime | 100 |
+| Bench | 40 | | Vegetable plot | 120 |
+| Lantern | 50 | | Koi pond | 150 |
+| Birdbath | 60 | | Evening bell | 200 |
+| | | | Fountain | 250 |
+| | | | Guild banner | 300 |
+
+≈ 1,500 coins to complete at draft prices — several weeks of ordinary play,
+with promotion windfalls (20–300) mapping naturally onto the grand fixtures.
 
 ## 5. Price sheet (draft)
 
 | Purchase | Price | Limit |
 |---|---|---|
 | Long rest (+5 min break) | 10 | ×2 per block |
-| Furlough (2-min phone window in focus) | 25 | 1 armed per block; refunded if unused |
+| Courtyard fixtures | 20–300 | one-time each |
 
-Calibration: a furlough costs roughly half a day's casual income — affordable
-weekly, not hourly. Long rest is an easy near-daily treat. Both prices are
-single constants, tuned by feel.
+Long rest is the recurring small spend; the Courtyard is the aspirational
+large one. Both live in single price tables, tuned by feel.
 
 ## 6. What coins never buy
 
 Recorded so it isn't re-litigated: score, XP, or rank in any form; demotion
 shields; edits to the distraction log or Chronicle; quest rerolls or quest
 completion; anything class- or affinity-related (CLASSES.md pillar 5 — paid
-identity is fake identity); anything randomized (no loot, no gacha).
+identity is fake identity); **boosts to the self** — equipment, multipliers,
+or anything that changes scoring, earning rates, or detection (pillar 3);
+anything retroactive (you buy before the act, never absolution after);
+anything randomized (no loot, no gacha).
 
-## 7. Future sinks (post-v1)
+## 7. Cut: Furlough (and why)
 
-The build-a-world hook (CONCEPT.md §5B) is the economy's real endgame sink —
-coins as building material. Cosmetics (badge frames, break ambiance) are
-possible before that. Both wait: v1 ships exactly the two sinks above so the
-economy's *shape* (earn by focus, spend on rest) proves out first.
+A pre-paid "sanctioned phone window during focus" was drafted and cut. In
+an observation-only app the score already *is* the price of phone use — a
+furlough is score insurance with extra steps, and the rational user skips
+the counter and eats the 4 points. Purchasable phone time only has real
+value when there's enforcement to unlock — the dock (CONCEPT.md §7) or app
+shielding (§9, v2+). Parked behind that precondition, not deleted.
 
-## 8. Open questions (for Austin)
+## 8. Future sinks (post-v1)
 
-1. **Should Furlough exist at all?** It's the boldest idea in CONCEPT.md
-   §5A, but some players may read any sanctioned phone time as heresy. v1
-   could ship Long rest alone and add Furlough behind a later flag.
-2. **Arm-at-plan vs. buy-mid-focus.** Pre-arming is purer pre-commitment
-   (and the refund removes the sting); a mid-focus purchase is simpler to
-   build but puts a shop inside the temple. Drafted as pre-arm.
-3. **Rates and prices** — 1/5min income, 10/25 prices, the 2-minute window:
-   all feel-tuned constants; sign off after living with them.
-4. **Names.** "Long rest" (D&D borrow) and "Furlough" — alts: Extended
-   break, Phone pass, Leave pass.
-5. **Does the clean-block bonus stacking with Clean sweep feel right**, or
-   should the quest absorb the bonus?
+The world beyond the Courtyard (§5B) as the endgame sink; cosmetics
+(badge frames, break ambiance) possibly before that; Furlough if
+enforcement ever exists (§7 above). v1 ships exactly two sinks so the
+economy's shape — earn by focus, spend on rest and place — proves out
+first.
 
-## 9. Implementation sketch (when approved)
+## 9. Open questions (for Austin)
 
-- `CoinStore.spend(_:) -> Bool` (guarded, no negative balances) beside the
-  existing `earn`.
-- Prices and income rates in **one table** (`CoinPrices`), the
-  ladder/catalog idiom.
+1. **Rates and prices** — 1 coin/5 min income, Long rest at 10, the 20–300
+   catalog: all feel-tuned constants; sign off after living with them.
+2. **Names** — the Courtyard (alts: Grove, Garden) and every fixture name.
+3. **Catalog size** — 14 fixtures drafted; right v1 size? (Slots in the
+   scene should slightly exceed launch fixtures so it never looks "done".)
+4. **Courtyard surfacing** — its own screen (drafted) vs. a living strip on
+   the plan screen itself?
+5. **Clean-bonus stacking** with Clean sweep — keep both, or fold one out?
+
+## 10. Implementation sketch (when approved)
+
+- `CoinStore.spend(_:) -> Bool` (guarded, no negative balance) beside
+  `earn`.
+- The one-table idiom, twice: `CoinPrices` (income rates + Long rest) and
+  `FixtureCatalog` (id, name, price, anchor slot, draw routine).
 - Per-minute income pays out in `enterReview` (single exit point, same as
   XP banking).
-- Furlough: an armed flag on the engine; invocation timestamps a window
-  that `record(_:)` and `sceneWentToBackground` check before logging; one
-  new event kind for the review log; refund in `enterReview` if uninvoked.
-- Long rest: extend `breakDuration` + reschedule the notification; UI on
-  BreakPromptView/BreakView.
+- `CourtyardStore` (purchased fixtures, persisted) + `CourtyardView` (the
+  parametric scene; per-fixture seeded variation).
+- Long rest: extend `breakDuration` + reschedule the notification; buttons
+  on BreakPromptView/BreakView.
 - Nothing touches scoring — the score path stays purchase-blind (pillar 2).
