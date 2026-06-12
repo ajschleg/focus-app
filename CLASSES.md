@@ -93,7 +93,9 @@ class is computed from (and future-proofs stats screens):
 | Onboarding quiz | first launch | selected lifestyle chips |
 
 Local only (a JSON file on device), like everything else in the app. No
-account, no upload; HealthKit data never leaves the device.
+account, no upload; HealthKit data never leaves the device. Append-only and
+**never pruned**: an entry is a kind and a date, so a decade costs
+kilobytes — and the year recap (§13) needs the full history.
 
 ## 5. Affinity: seven axes
 
@@ -307,11 +309,15 @@ roster should prove itself first.
 2. Top two axes both awake, runner-up ≥ 0.6× top, ladder level ≥ 3 → the
    **hybrid** for that pair.
 3. Otherwise → the **base class** of the top axis.
-4. **Hysteresis:** a newly computed title must repeat across 3 consecutive
-   days before it's adopted, so a single odd weekend can't flap the class.
+4. **Hysteresis on an active-days clock:** a newly computed title must
+   repeat across 3 consecutive **active days** — days with at least one
+   Chronicle entry — before it's adopted, so a single odd weekend can't
+   flap the class. Silence never advances the clock: a trip or a sick week
+   of any length holds the title until fresh evidence says otherwise. *The
+   class changes on evidence of a changed life, never on absence.*
    Exception: leaving Wanderer is instant — the first class should land the
-   moment it's earned. The same hold guards the slide *back* to Wanderer
-   when every axis fades: a quiet week doesn't strip a title overnight.
+   moment it's earned. The same held clock guards the slide *back* to
+   Wanderer when every axis fades.
 5. **Gate changes are instant; drift changes are held.** Hysteresis governs
    affinity-driven changes only. Crossing the hybrid gate (promotion to
    Journeyman) re-renders the title immediately, and a demotion below it
@@ -448,14 +454,19 @@ Mind needs no nudge; the core loop is the Mind nudge.
   popover answering *why this title*. Two layers: the class's why-line from
   the roster table, then a receipts line generated from the Chronicle —
   "driven by 5 workouts · 4 sketches · 3 walks these past two weeks" — so
-  the answer is personal evidence, not canned copy. (What the popover says
-  about the *level* half of the title is still open — §10.)
+  the answer is personal evidence, not canned copy. After a long quiet
+  stretch the receipts say so plainly — "your Chronicle has been quiet
+  lately" — so a title held through absence (rule 4) is transparent, never
+  a lie. (What the popover says about the *level* half of the title is
+  still open — §10.)
 - **Class change:** a small dismissible card on the plan screen — "Your path
-  has shifted: Scholar → Monk." No modal, no fanfare (pillar 2).
+  has shifted: Scholar → Monk." No modal, no fanfare (pillar 2). One
+  exception: the **first** class award — the day Wanderer ends — gets a
+  single full-screen ceremony: the art, the why-line, "You've been seen."
+  Every later shift is the quiet card.
 - **v1 stops there.** No class artwork, no perks, no stats screen. Cosmetic
-  title first; if it feels alive, later versions can add class art (style
-  guide and per-class briefs ready in §6), a Chronicle screen (the affinity
-  portrait), and class-flavored quest skins.
+  title first; if it feels alive, the depth roadmap (§13) takes over —
+  character sheet, codex, trials, class voice, widgets, the year recap.
 
 ## 10. Open questions (for Austin)
 
@@ -469,7 +480,9 @@ Mind needs no nudge; the core loop is the Mind nudge.
    a dedicated, feather-light screen (bubbles · Continue · Skip), per §7.
 4. **Hybrid gate.** Ladder ≥ 3 to show hybrids — right bar? Alternative: gate
    on total marks instead of level.
-5. **Pursue-a-class pin** (explicit switching) — v2 as proposed, or v1?
+5. **Pursue-a-class pin** — resolved: ships post-v1 as class trials (§13),
+   offered by the quest board when a rising second axis makes a new class
+   reachable.
 6. **Should the exercise quest's double mark extend to other verified
    signals later** (e.g., mindful minutes from HealthKit → Spirit)?
 7. **Seven axes — the right grain?** Five felt cramped once meditation,
@@ -550,6 +563,18 @@ numbers without quietly rerouting someone's identity.
 - Level changes alone (identical chronicle) never change the class half of
   the title.
 
+**Absence (the active-days clock)**
+- 9-day gap, then normal life resumes → the title never flips: no active
+  days passed while away, and the axes re-wake inside the 3-active-day
+  window.
+- 90-day gap, same life on return → identical to the 9-day case — title
+  held throughout, Chronicle refills, no change ever adopted. No threshold,
+  no cliff.
+- 90-day gap, *different* life on return → the new portrait lands after
+  exactly 3 active days. Absence never changes the class; evidence does.
+- Present-but-changed → unaffected by the rule: daily blocks make every day
+  active, so drift behaves exactly as the identity-path tests above.
+
 **Math & clock edges**
 - Marks at the half-life boundaries (7d, 14d) decay exactly as specified —
   no off-by-one day binning.
@@ -560,3 +585,51 @@ numbers without quietly rerouting someone's identity.
 - Exactly-equal affinities → incumbent keeps the class; fresh ties resolve
   by lifetime marks, then §5 table order. Same input, same title, always.
 - All axes fade below the awake bar → Wanderer only after the 3-day hold.
+
+## 13. Depth roadmap (decided, post-v1)
+
+Adopted directions, in rough build order. None block v1; all feed on the
+Chronicle that v1 starts writing.
+
+- **The character sheet.** The deferred stats screen done as a proper RPG
+  sheet: class art and title, the seven affinities drawn as a spider chart
+  (it is literally a character sheet), lifetime stats (blocks, focus hours,
+  workouts, coins), and the class history timeline — "Scholar through
+  March, Monk all spring, Wizard since June." Every byte already exists in
+  the Chronicle.
+- **Ceremony.** The first-class award ships in v1 (§9); the roadmap adds
+  the rare-moment family — first hybrid, a class held twelve weeks, the
+  100th block as an Ascetic. Milestones read from the Chronicle, fire once,
+  and are never a streak meter (pillar 4).
+- **The codex.** A browsable gallery of all 30 figures: classes you've held
+  are painted, unheld ones are parchment silhouettes with their why-line
+  shown as a riddle ("Iron and ink…"). Collection depth that provokes "what
+  would I have to live like to be a Shaman?" — variety pulled by curiosity,
+  never a completion percentage.
+- **Class trials** (resolves §10 #5). When a rising second axis puts a new
+  class in reach, the quest board may offer a themed trial — "The Wizard
+  stirs: two workouts and a sketch this week." Drift made visible and
+  chosen; the pursue-a-class pin done with flavor instead of a settings
+  toggle.
+- **Class voice.** One more roster column: a greeting line per class on the
+  plan screen — "The forge is warm" (Blacksmith), "The garden waits"
+  (Druid). Pure charm, and proof the data-driven roster pays for itself.
+- **Widget & Live Activity.** The title and art on the home screen; during
+  a focus block the class figure keeps watch on the lock screen. The class
+  system escaping the app with zero new mechanics.
+- **A year in the Chronicle.** An annual recap generated locally: blocks
+  and focus hours, the classes-held timeline, top activities, the ladder
+  journey, coins earned — the year painted as one page of the manual,
+  shareable as a card if the player chooses. Free because the Chronicle is
+  never pruned (§4).
+- **The world bridge (far horizon).** When CONCEPT.md §5B's build-a-world
+  hook arrives, classes shape what grows: a Druid's focus raises a grove, a
+  Blacksmith's a forge district. Where the label becomes a world-generator.
+
+**Deliberate non-goals**, recorded so they aren't re-litigated: mechanical
+perks (a class that pays better coins makes self-reports worth lying about —
+breaks pillar 5); anything social or leaderboard-shaped (the portrait is
+personal; comparison turns lifestyle into competition); and app-usage-derived
+classes (iOS exposes no per-app data — opaque labeled-bucket thresholds are
+the only legal shape, and screen-time classes cut against the off-screen
+thesis).
