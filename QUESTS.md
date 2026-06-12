@@ -17,6 +17,9 @@
   touching the phone.
 - **Automatic (verified)** — completed by an outside signal (HealthKit).
   No buttons at all; never fails, just carries over.
+- **Daily draw (opt-in)** — rolls once a day: may appear on the quest board
+  at random, at most once per day. Must be accepted *before* a block starts
+  to arm it for that block; unaccepted, it expires with the day.
 
 ## Current quests
 
@@ -26,6 +29,7 @@
 | **Clean sweep** | Auto-judged, opt-in | Quest board row each cycle; judges the next block only if accepted first. Dies on the first distraction or an early quit. | 25 | Mind +1 | "Finish your next block with zero distractions." |
 | **Stillness check** | Surprise | Springs 20–50% of the way into a focus block (every block while tuning — `QuestBoard.surpriseChance`). Window: up to 5 minutes, never more than half the time left, skipped entirely under 15 seconds. | 10 | Spirit +1 | "Hands off the phone for the next *X*." |
 | **Move your body** | Automatic (HealthKit) | Quest board row on days it hasn't been earned yet; completes the moment any workout with today's end date syncs in. While open, the break prompt suggests taking the break as a short walk. | 30 | Body +2 | "Finish any workout today. Completes on its own when Health logs one." |
+| **Standing focus** *(planned — not yet built)* | Daily draw, opt-in | Appears on the quest board at random, at most once a day; accept before starting a block to arm it for that block. Judged at block end against Apple Watch stand minutes overlapping the block (HealthKit `appleStandTime`). | 20 | Body +1 | "Stay on your feet for this whole block." |
 
 Affinity notes: marks land in the Chronicle when a quest completes — live
 once the classes feature ships (CLASSES.md §4). Verified signals mark
@@ -42,8 +46,15 @@ opt-in-judged).
 - Resolved quests show once on the review screen, then are swept when
   planning resumes; fresh offers are seeded each cycle.
 - **Move your body** is once per calendar day (completion stamps the day);
-  it never fails and carries over while unearned. All others are
-  once per cycle.
+  it never fails and carries over while unearned. Daily draws stamp their
+  *appearance* day instead — drawn or not, the roll happens once per day.
+  All others are once per cycle.
+- **Standing focus** draft decisions, for sign-off: it is only drawn when
+  stand data can exist (a watch is paired) — 20 coins on the honor system
+  would invite lying, so no self-report fallback; verification is "stand
+  minutes cover the block within a small tolerance" (you may sit briefly
+  without failing — exact tolerance tuned on device). Alt name on the
+  table: "Stand guard."
 
 ## Tuning & nudges
 
