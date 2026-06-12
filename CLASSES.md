@@ -175,6 +175,46 @@ Homesteader, Paragon Shaman.*
 
 All told: 7 base + 21 hybrids + Wanderer = **29 titles**.
 
+### The "why this title" lines (all DRAFT)
+
+Every class carries a one-sentence, second-person answer to "why am I
+this?", shown from the small ⓘ next to the title (§9). It's one more column
+in the roster table — a new class isn't done until its why-line exists
+(pillar 6). Base classes share a deliberate refrain ("…claims your weeks")
+so they read as a family; hybrids get their own cadence.
+
+| Class | Why-you line |
+|---|---|
+| Wanderer | Every path is still open — no single pursuit has claimed your weeks yet. |
+| Warrior | Movement claims your weeks: workouts, stretches, active breaks. |
+| Scholar | Study claims your weeks: focus blocks, reading, learning. |
+| Mystic | Stillness claims your weeks: meditation, journaling, quiet. |
+| Artisan | Making claims your weeks: drawing, writing, music, craft. |
+| Bard | People claim your weeks: conversation, calls, company. |
+| Keeper | The home claims your weeks: cooking, tidying, small rituals. |
+| Druid | Green things claim your weeks: plants, gardens, open air. |
+| Monk | Training and study in balance — strong back, sharp mind. |
+| Templar | Sweat beside stillness — you train the body and quiet the mind. |
+| Wizard | Iron and ink — you train hard and you make things. |
+| Paladin | Strength spent on people — you move, and you show up. |
+| Blacksmith | Muscle at the hearth — workouts beside house-work. |
+| Ranger | Your training lives outdoors — movement among green things. |
+| Philosopher | You learn, then sit with it — study beside reflection. |
+| Artificer | You learn things, then build them. |
+| Sage | Learning shared — study beside good company. |
+| Alchemist | Deep focus, home ritual — study brewed with tea. |
+| Naturalist | You study the world, then go walk in it. |
+| Calligrapher | Quiet hands, made things — craft beside stillness. |
+| Cleric | Calm given away — stillness beside care for people. |
+| Candlekeeper | Small flames kept lit — quiet ritual at home. |
+| Shaman | Your stillness happens outside — quiet among green things. |
+| Jester | Made to be shared — your craft happens in company. |
+| Tinker | You fix and make around the house. |
+| Herbalist | Craft from what grows — making beside the garden. |
+| Innkeeper | A home with people in it — hosting, cooking, company. |
+| Shepherd | Company taken outdoors — people and pastures. |
+| Homesteader | You grow it, then you cook it — garden beside kitchen. |
+
 ### Later (v2 sketch): epithets
 
 When a single activity supplies most of the top axis (say ≥ 60% of its
@@ -289,6 +329,12 @@ Mind needs no nudge; the core loop is the Mind nudge.
 
 - **Plan screen badge:** "Level 3 · Journeyman **Warrior**" — the class
   simply joins the line that exists today.
+- **The ⓘ beside the title:** a small info button on the badge opens a
+  popover answering *why this title*. Two layers: the class's why-line from
+  the roster table, then a receipts line generated from the Chronicle —
+  "driven by 5 workouts · 4 sketches · 3 walks these past two weeks" — so
+  the answer is personal evidence, not canned copy. (What the popover says
+  about the *level* half of the title is still open — §10.)
 - **Class change:** a small dismissible card on the plan screen — "Your path
   has shifted: Scholar → Monk." No modal, no fanfare (pillar 2).
 - **v1 stops there.** No class artwork, no perks, no stats screen. Cosmetic
@@ -319,6 +365,11 @@ Mind needs no nudge; the core loop is the Mind nudge.
 9. **Recap subset size.** Nine visible bubbles (six habitual + two sleepy +
    honesty) — right amount, or fewer?
 10. **Epithets** — v2 as sketched, or pull into v1 since variety is the goal?
+11. **The level half of the ⓘ popover.** The class half is settled (why-line
+    + receipts); what should it say about the ladder rank? Likely shape: the
+    rank's plain meaning plus live progress ("Journeyman — rank 3 of 10.
+    Score 60+ in a block to climb"), which the badge's progress line already
+    knows how to compute. Undecided.
 
 ## 11. Implementation sketch (when approved)
 
