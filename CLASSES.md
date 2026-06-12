@@ -234,7 +234,34 @@ roster above should prove itself first.
 4. **Hysteresis:** a newly computed title must repeat across 3 consecutive
    days before it's adopted, so a single odd weekend can't flap the class.
    Exception: leaving Wanderer is instant — the first class should land the
-   moment it's earned.
+   moment it's earned. The same hold guards the slide *back* to Wanderer
+   when every axis fades: a quiet week doesn't strip a title overnight.
+5. **Gate changes are instant; drift changes are held.** Hysteresis governs
+   affinity-driven changes only. Crossing the hybrid gate (promotion to
+   Journeyman) re-renders the title immediately, and a demotion below it
+   collapses a hybrid to the dominant base class until the gate is
+   re-earned — the affinities underneath are untouched either way.
+6. **Ties keep the incumbent.** Exactly-equal affinities never flap the
+   class: the current class wins ties; with no incumbent, higher lifetime
+   marks break it, then §5 table order. Same chronicle, same title, always —
+   that determinism is what makes the engine testable (§12).
+
+### The silent player (no quiz, no recaps — a worked example)
+
+Skipping every prompt forever is a supported way to play (pillar 2), so the
+automatic signals decide the story. Focus blocks feed Mind, which makes the
+pure focuser's path: **Novice Wanderer → Scholar within about a week of
+daily blocks**, then up the ladder as a Scholar — the level climbs, the
+class holds, and *Grandmaster Scholar* is a perfectly good silent endgame.
+The ladder never chooses the class; the hybrid gate is the only place level
+and class touch.
+
+Quests are the silent player's only other voice: add the exercise quest most
+days and Body wakes — **Monk** from Journeyman up (or Warrior if training
+dominates). Hydrate every block and **Alchemist** comes into reach. All
+deliberate: for a player who gives the app nothing else, "you focus and you
+train" *is* the portrait. The §12 tests pin these paths so tuning can't
+quietly reroute them.
 
 ### Switching classes
 
@@ -242,6 +269,11 @@ No menu, no button: **decay is the switch.** Two weeks of a new pattern
 rewrites the portrait. (Open question §10: a later "Pursue a class" pin where
 the player picks a target and the quest board leans offers toward its axes —
 deliberately not in v1 until drift proves too slow or too fast.)
+
+This is also the late-bloomer story: a Grandmaster Scholar who finally
+starts tapping recap bubbles (or logging workouts) shifts class like anyone
+else — the decay crossover plus the three-day hold, level untouched. The
+gate is long behind them, so hybrids unlock the moment a second axis wakes.
 
 ## 7. Feeding the Chronicle
 
@@ -280,7 +312,9 @@ other mark**, so the quiz biases the opening portrait and then real behavior
 takes over. That decay is also why the "skipping is fine" line is honest,
 not soft-pedaling: takers and skippers converge on the same class within a
 couple of weeks; skippers just wear Wanderer a little longer. Asked once,
-never again.
+never again — and deliberately no late retake: a quiz taken at Grandmaster
+would be a no-op, three decaying seed marks against months of Chronicle.
+It's a cold-start tool, nothing more (§12 pins that with a test).
 
 Build note: the quiz only matters at install time, so it's **ship-blocking,
 not prototype-blocking** — it's the last piece of this feature to build,
@@ -398,3 +432,47 @@ one data table per concept:
   the §7 build note), and a one-line change to the plan badge.
 - Nothing touches `FocusEngine` — the class layer can ship, change, or be
   deleted without entering block logic.
+
+## 12. Edge cases & test plan
+
+`ClassEngine` is a pure function `(chronicle, date) → title`, so every case
+below is a plain unit test: build a synthetic Chronicle, ask for the title,
+assert. No simulator, no HealthKit, no clock-mocking beyond the `date`
+parameter. These ship *with* the feature, not after — the assignment rules
+are the product, and the tests are what let tuning (§10 #4, #7, #9) move
+numbers without quietly rerouting someone's identity.
+
+**Identity paths**
+- Empty chronicle → Novice Wanderer.
+- Quiz skipped, focus blocks only → Scholar within ~a week of daily blocks;
+  stays Scholar (never a hybrid) while no second axis wakes.
+- Focus + exercise quest most days → Monk once the gate is passed; Warrior
+  if Body dominates ≥ 1.6×.
+- Focus + Hydrate every block → Alchemist is reachable. (Deliberate tuning
+  tripwire: if a routine quest alone shouldn't steer the class, this test is
+  where the weights get revisited.)
+- Late quiz at high level → title unchanged: seed marks are negligible
+  against an established chronicle, which is what keeps the "skipping is
+  honest" pitch true.
+- Late bloomer: Mind-heavy history, then daily Body marks → class shifts
+  only after the decay crossover *and* 3 consecutive daily recomputes;
+  never flaps mid-shift.
+
+**Gate × ladder interplay**
+- Two comparable awake axes below Journeyman → dominant base class only;
+  promotion to Journeyman → the hybrid appears immediately, no hysteresis.
+- Demotion below Journeyman while holding a hybrid → collapses immediately
+  to the dominant base class; re-promotion restores the hybrid.
+- Level changes alone (identical chronicle) never change the class half of
+  the title.
+
+**Math & clock edges**
+- Marks at the half-life boundaries (7d, 14d) decay exactly as specified —
+  no off-by-one day binning.
+- Cross-midnight activity counts for the day it *ended* (same rule as the
+  exercise quest).
+- Soft cap: ten bubbles tapped in one day → at most 4 marks land on any
+  axis.
+- Exactly-equal affinities → incumbent keeps the class; fresh ties resolve
+  by lifetime marks, then §5 table order. Same input, same title, always.
+- All axes fade below the awake bar → Wanderer only after the 3-day hold.
