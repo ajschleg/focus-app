@@ -53,10 +53,10 @@ block.
 
 **Focus coins** (CONCEPT.md §5A) are earned by completing **quests**. `Quest`
 is a base class — subclass it, override the lifecycle hooks (`focusStarted`,
-`focusTicked`, `distractionRecorded`, `blockFinished`), and call `complete()`
-/ `fail()`; `QuestBoard` relays the engine's published state into those hooks
-and pays into `CoinStore` on completion, so new quests never touch block
-logic. Three starter quests, one per pattern:
+`focusTicked`, `distractionRecorded`, `blockFinished`, `workoutLogged`), and
+call `complete()` / `fail()`; `QuestBoard` relays the engine's published
+state into those hooks and pays into `CoinStore` on completion, so new quests
+never touch block logic. Four starter quests, one per pattern:
 
 - **Hydrate** (pre-focus prompt, self-report) — pops as a sheet when you tap
   "Start focus": Done pays +5 and the block starts either way (skipped offers
@@ -68,6 +68,17 @@ logic. Three starter quests, one per pattern:
   during focus and asks for a stretch of hands-off time, +10. Deliberately
   zero-interaction: it completes by *not* touching the phone. While tuning,
   it fires every block (`QuestBoard.surpriseChance`).
+- **Move your body** (menu, automatic, once per day) — finish any workout
+  today, +30. Completed by HealthKit, not by a tap: `WorkoutMonitor` observes
+  workouts (read permission is asked the first time the quest appears) and
+  the quest pays the moment one with today's end date syncs in — from the
+  watch, the Fitness app, Strava, whatever. Background delivery (entitlement
+  in `project.yml`) lets that happen while the app is suspended; without it
+  the quest settles on the next foreground. It never fails — undone, it
+  carries over, and the **break prompt suggests taking the break as a short
+  walk** while it's open. Completion stamps the calendar day in
+  `UserDefaults`, so it reappears each new day. To test in the Simulator:
+  Health app → Browse → Activity → Workouts → Add Data.
 
 ## Signals (entitlement-free v1 fusion)
 

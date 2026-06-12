@@ -6,6 +6,8 @@ struct ContentView: View {
     @EnvironmentObject private var engine: FocusEngine
     @EnvironmentObject private var experience: ExperienceStore
     @EnvironmentObject private var notifier: BlockNotifier
+    @EnvironmentObject private var board: QuestBoard
+    @EnvironmentObject private var workouts: WorkoutMonitor
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -34,8 +36,14 @@ struct ContentView: View {
                 engine.sceneWentToBackground()
             }
             // Coming back to the foreground: re-read notification permission
-            // in case the user just flipped it in Settings.
-            if newPhase == .active { notifier.refreshStatus() }
+            // in case the user just flipped it in Settings, catch any workout
+            // that synced in while we slept, and re-check the daily offers
+            // (midnight may have passed).
+            if newPhase == .active {
+                notifier.refreshStatus()
+                workouts.refresh()
+                board.refreshOffers()
+            }
         }
     }
 }
@@ -59,11 +67,13 @@ private struct LevelBackground: View {
     let experience = ExperienceStore()
     let coins = CoinStore()
     let notifier = BlockNotifier()
+    let workouts = WorkoutMonitor()
     let engine = FocusEngine(experience: experience, notifier: notifier)
     ContentView()
         .environmentObject(engine)
         .environmentObject(experience)
         .environmentObject(coins)
-        .environmentObject(QuestBoard(engine: engine, coins: coins))
+        .environmentObject(QuestBoard(engine: engine, coins: coins, workouts: workouts))
         .environmentObject(notifier)
+        .environmentObject(workouts)
 }

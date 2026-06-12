@@ -340,5 +340,5 @@ private struct BreakSummary: View {
     ReviewView()
         .environmentObject(engine)
         .environmentObject(experience)
-        .environmentObject(QuestBoard(engine: engine, coins: CoinStore()))
+        .environmentObject(QuestBoard(engine: engine, coins: CoinStore(), workouts: WorkoutMonitor()))
 }

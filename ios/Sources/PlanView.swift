@@ -296,6 +296,14 @@ private struct MenuQuestRow: View {
             Button("Done", action: reportDone)
                 .buttonStyle(.bordered)
                 .controlSize(.small)
+        case .offered where quest.isAutomatic:
+            // Nothing to tap — an outside signal (Health) completes these.
+            VStack(alignment: .trailing, spacing: 6) {
+                bounty
+                Label("Auto", systemImage: "heart.fill")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
         case .offered:
             VStack(alignment: .trailing, spacing: 6) {
                 bounty
@@ -353,11 +361,13 @@ private struct TemplateRow: View {
     let experience = ExperienceStore()
     let coins = CoinStore()
     let notifier = BlockNotifier()
+    let workouts = WorkoutMonitor()
     let engine = FocusEngine(experience: experience, notifier: notifier)
     PlanView()
         .environmentObject(engine)
         .environmentObject(experience)
         .environmentObject(coins)
-        .environmentObject(QuestBoard(engine: engine, coins: coins))
+        .environmentObject(QuestBoard(engine: engine, coins: coins, workouts: workouts))
         .environmentObject(notifier)
+        .environmentObject(workouts)
 }

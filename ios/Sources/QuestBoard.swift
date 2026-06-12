@@ -23,6 +23,9 @@ final class QuestBoard: ObservableObject {
     }
     /// Quests with a verdict, for the review screen.
     var resolvedQuests: [Quest] { quests.filter { $0.status == .completed || $0.status == .failed } }
+    /// This cycle's exercise quest, if one is in play — the break prompt
+    /// nudges a walk while it's open and confirms once the workout lands.
+    var exerciseQuest: Quest? { quests.first { $0 is ExerciseQuest } }
     /// Coins paid out this cycle — the review screen's payoff line.
     var coinsEarnedThisCycle: Int {
         quests.lazy.filter { $0.status == .completed }.reduce(0) { $0 + $1.reward }
@@ -40,6 +43,8 @@ final class QuestBoard: ObservableObject {
 
     private let engine: FocusEngine
     private let coins: CoinStore
+    /// HealthKit workouts, feeding the daily exercise quest.
+    private let workouts: WorkoutMonitor
     private var subs = Set<AnyCancellable>()
     /// One payout watcher per adopted quest, dropped when the quest is swept.
     private var payoutSubs = [UUID: AnyCancellable]()
@@ -47,9 +52,10 @@ final class QuestBoard: ObservableObject {
     /// Elapsed-time at which this block's surprise fires, if one is scheduled.
     private var surpriseAt: TimeInterval?
 
-    init(engine: FocusEngine, coins: CoinStore) {
+    init(engine: FocusEngine, coins: CoinStore, workouts: WorkoutMonitor) {
         self.engine = engine
         self.coins = coins
+        self.workouts = workouts
 
         // $state replays its current value on subscribe, so this also seeds
         // the initial offers (the engine starts in .planning).
@@ -65,6 +71,23 @@ final class QuestBoard: ObservableObject {
         engine.$remaining
             .sink { [weak self] remaining in self?.ticked(remaining: remaining) }
             .store(in: &subs)
+
+        // The monitor publishes on the main thread and replays its current
+        // value, so a workout found before this subscription still lands
+        // (the $state replay above has already seeded the quests).
+        workouts.$lastWorkoutEnd
+            .compactMap { $0 }
+            .removeDuplicates()
+            .sink { [weak self] end in self?.quests.forEach { $0.workoutLogged(endedAt: end) } }
+            .store(in: &subs)
+    }
+
+    /// Daily offers can change without a state transition — midnight can pass
+    /// while the app sits on the plan screen — so the foreground observer
+    /// re-checks them.
+    func refreshOffers() {
+        guard engine.state == .planning else { return }
+        seedMenuOffers()
     }
 
     /// User tapped "Done" on a self-reported quest.
@@ -164,6 +187,14 @@ final class QuestBoard: ObservableObject {
         }
         if !quests.contains(where: { $0 is CleanSweepQuest }) {
             adopt(CleanSweepQuest())
+        }
+        // One workout a day: only seeded on days it hasn't been earned yet.
+        // Starting the monitor here keeps the HealthKit permission sheet tied
+        // to the quest's first appearance rather than app install.
+        if workouts.isAvailable, !ExerciseQuest.completedToday(),
+           !quests.contains(where: { $0 is ExerciseQuest }) {
+            adopt(ExerciseQuest())
+            workouts.start()
         }
     }
 }

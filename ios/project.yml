@@ -23,13 +23,21 @@ targets:
       - path: Assets.xcassets
     scheme: {}   # generate a shared scheme so a clean clone can build without Xcode autocreating one
     entitlements:
-      # Lets the phase-end notifications break through Focus/DND modes (and
-      # the Scheduled Summary) — a timer the user explicitly started is what
-      # Time Sensitive is for. Remove this block if signing complains;
-      # notifications then degrade to the default interruption level.
+      # Time-sensitive lets the phase-end notifications break through
+      # Focus/DND modes (and the Scheduled Summary) — a timer the user
+      # explicitly started is what Time Sensitive is for. Remove that key if
+      # signing complains; notifications then degrade to the default
+      # interruption level.
+      #
+      # HealthKit feeds the daily exercise quest (WorkoutMonitor reads
+      # workouts); background delivery lets a workout syncing in while the
+      # app naps complete the quest same-day. Without background delivery the
+      # quest still completes on the next foreground.
       path: FocusSlice.entitlements
       properties:
         com.apple.developer.usernotifications.time-sensitive: true
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.background-delivery: true
     configFiles:
       # DEVELOPMENT_TEAM lives in the gitignored Signing.local.xcconfig so it
       # never enters version control — see ios/Signing.xcconfig.
@@ -45,4 +53,5 @@ targets:
         INFOPLIST_KEY_CFBundleDisplayName: FocusSlice
         INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
         INFOPLIST_KEY_NSMotionUsageDescription: "FocusSlice reads device motion to detect when you pick up your phone during a focus block, so it can log it as a distraction."
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "FocusSlice reads your workouts so the daily exercise quest completes automatically when you log one."
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"

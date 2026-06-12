@@ -159,5 +159,5 @@ private struct LiveStat: View {
     let engine = FocusEngine()
     FocusView()
         .environmentObject(engine)
-        .environmentObject(QuestBoard(engine: engine, coins: CoinStore()))
+        .environmentObject(QuestBoard(engine: engine, coins: CoinStore(), workouts: WorkoutMonitor()))
 }

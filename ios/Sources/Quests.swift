@@ -1,9 +1,11 @@
 import Foundation
+import SwiftUI
 
-// The concrete quests. Three patterns so far, one of each:
+// The concrete quests. Four patterns so far, one of each:
 //  - SelfReportQuest: honor-system menu quest ("Done" button)
 //  - CleanSweepQuest: auto-judged menu quest (watches the block's signals)
 //  - StillnessQuest:  the mid-block surprise (zero-interaction by design)
+//  - ExerciseQuest:   completed by the world outside the app (HealthKit)
 
 /// A quest completed on the honor system — tap "Done" wherever it surfaces
 /// (a quest-board row, or the pre-focus prompt sheet). For the healthy habits
@@ -38,6 +40,50 @@ final class CleanSweepQuest: Quest {
     override func blockFinished(events: [DistractionEvent], endedEarly: Bool) {
         guard status == .active else { return }   // never accepted — not judged
         endedEarly ? fail() : complete()
+    }
+}
+
+/// Exercise once today — completed by HealthKit, not by a tap: the moment any
+/// workout (watch, Fitness app, Strava, ...) syncs in with today's date, the
+/// quest pays out, whatever screen the app is on. It never fails; undone it
+/// just carries over, and the break prompt uses it to suggest a walk.
+///
+/// Once per day: completion stamps the calendar day, and the board only
+/// seeds a fresh one on days without a stamp. HealthKit read denials are
+/// invisible by design, so a denied quest simply never completes — it stays
+/// a standing suggestion to move.
+final class ExerciseQuest: Quest {
+    override var isAutomatic: Bool { true }
+
+    private static let lastCompletedKey = "quest.exercise.lastCompletedDay"
+
+    /// The once-per-day gate, persisted across launches.
+    static func completedToday(defaults: UserDefaults = .standard) -> Bool {
+        guard let day = defaults.object(forKey: lastCompletedKey) as? Date else { return false }
+        return Calendar.current.isDateInToday(day)
+    }
+
+    init() {
+        super.init(title: "Move your body",
+                   detail: "Finish any workout today. Completes on its own when Health logs one.",
+                   reward: 30,
+                   placement: .menu,
+                   systemImage: "figure.walk",
+                   tint: .mint)
+    }
+
+    override func workoutLogged(endedAt date: Date) {
+        // The monitor can replay yesterday's workout right after midnight —
+        // only today's counts.
+        guard Calendar.current.isDateInToday(date) else { return }
+        complete()
+    }
+
+    override func complete() {
+        super.complete()
+        if status == .completed {
+            UserDefaults.standard.set(Date(), forKey: Self.lastCompletedKey)
+        }
     }
 }
 

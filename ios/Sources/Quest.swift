@@ -41,6 +41,11 @@ class Quest: ObservableObject, Identifiable {
     /// honor-system habits (water, stretching) no sensor can verify.
     var isSelfReported: Bool { false }
 
+    /// Automatic quests are completed by an outside signal (a workout syncing
+    /// in from HealthKit) — no Done button, no Accept; their row is purely
+    /// informational.
+    var isAutomatic: Bool { false }
+
     @Published private(set) var status: Status = .offered
 
     init(title: String, detail: String, reward: Int, placement: Placement,
@@ -66,6 +71,10 @@ class Quest: ObservableObject, Identifiable {
 
     /// The block reached review — last chance to judge the final state.
     func blockFinished(events: [DistractionEvent], endedEarly: Bool) {}
+
+    /// A workout landed in HealthKit (relayed from the board's workout
+    /// monitor, not the engine — it can fire in any session state).
+    func workoutLogged(endedAt date: Date) {}
 
     // MARK: - Transitions (one-way; a resolved quest never moves again)
 
