@@ -188,7 +188,7 @@ so they read as a family; hybrids get their own cadence.
 | Wanderer | Every path is still open — no single pursuit has claimed your weeks yet. |
 | Warrior | Movement claims your weeks: workouts, stretches, active breaks. |
 | Scholar | Study claims your weeks: reading, languages, learning. |
-| Sentinel | Focus itself claims your weeks: block after block of undivided attention. |
+| Ascetic | Focus itself claims your weeks: block after block of undivided attention. |
 | Mystic | Stillness claims your weeks: meditation, journaling, quiet. |
 | Artisan | Making claims your weeks: drawing, writing, music, craft. |
 | Bard | People claim your weeks: conversation, calls, company. |
@@ -229,10 +229,11 @@ them), and an epithet flip obeys the same 3-day hysteresis as any drift —
 no flapping at the 60% line.
 
 One epithet ships in v1 because it covers the app's most common player:
-**Mind dominated by focus blocks → Sentinel** *(alts: Strategist, Savant,
-Magus)* — the one who keeps watch over their work. "Scholar" should mean
-books and languages, not block counts; the pure focuser deserves their own
-name (decided — §10 #10). The rest of the epithet table stays v2: the
+**Mind dominated by focus blocks → Ascetic** *(alts: Sentinel, Archer,
+Delver)* — the one who denies every distraction. A freed ladder word: the
+old monk ladder retired it, and it fits the focuser better as an identity
+than it ever did as a rank. "Scholar" should mean books and languages, not
+block counts; the pure focuser deserves their own name (decided — §10 #10). The rest of the epithet table stays v2: the
 roster should prove itself first.
 
 ### Assignment rules, in order
@@ -260,9 +261,9 @@ roster should prove itself first.
 
 Skipping every prompt forever is a supported way to play (pillar 2), so the
 automatic signals decide the story. Focus blocks feed Mind, which makes the
-pure focuser's path: **Novice Wanderer → Sentinel within about a week of
+pure focuser's path: **Novice Wanderer → Ascetic within about a week of
 daily blocks** (the focus-dominated epithet of Scholar), then up the ladder
-— the level climbs, the class holds, and *Grandmaster Sentinel* is a
+— the level climbs, the class holds, and *Grandmaster Ascetic* is a
 perfectly good silent endgame. Start reading or practicing a language on
 breaks and the epithet dissolves into Scholar proper. The ladder never
 chooses the class; the hybrid gate is the only place level and class touch.
@@ -281,7 +282,7 @@ rewrites the portrait. (Open question §10: a later "Pursue a class" pin where
 the player picks a target and the quest board leans offers toward its axes —
 deliberately not in v1 until drift proves too slow or too fast.)
 
-This is also the late-bloomer story: a Grandmaster Sentinel who finally
+This is also the late-bloomer story: a Grandmaster Ascetic who finally
 starts tapping recap bubbles (or logging workouts) shifts class like anyone
 else — the decay crossover plus the three-day hold, level untouched. The
 gate is long behind them, so hybrids unlock the moment a second axis wakes.
@@ -414,7 +415,7 @@ Mind needs no nudge; the core loop is the Mind nudge.
 9. **Recap subset size.** Nine visible bubbles (six habitual + two sleepy +
    honesty) — right amount, or fewer?
 10. **Epithets** — resolved: one ships in v1 (focus-dominated Mind →
-    Sentinel, so "Scholar" stays a study word); the rest of the table is v2.
+    Ascetic, so "Scholar" stays a study word); the rest of the table is v2.
 11. **The level half of the ⓘ popover.** The class half is settled (why-line
     + receipts); what should it say about the ladder rank? Likely shape: the
     rank's plain meaning plus live progress ("Journeyman — rank 3 of 10.
@@ -456,13 +457,13 @@ numbers without quietly rerouting someone's identity.
 
 **Identity paths**
 - Empty chronicle → Novice Wanderer.
-- Quiz skipped, focus blocks only → Sentinel within ~a week of daily blocks;
-  stays Sentinel (never a hybrid) while no second axis wakes.
+- Quiz skipped, focus blocks only → Ascetic within ~a week of daily blocks;
+  stays Ascetic (never a hybrid) while no second axis wakes.
 - Steady reading/language marks beside the blocks → the epithet dissolves:
-  Sentinel → Scholar once focus drops below 60% of Mind marks, held to the
+  Ascetic → Scholar once focus drops below 60% of Mind marks, held to the
   3-day rule at the boundary (no flapping at 59/61%).
 - Epithets never touch hybrids: focus-dominated Mind plus an awake Body is
-  still Monk, not "Sentinel-something".
+  still Monk, not "Ascetic-something".
 - Focus + exercise quest most days → Monk once the gate is passed; Warrior
   if Body dominates ≥ 1.6×.
 - Focus + Hydrate every block → Alchemist is reachable. (Deliberate tuning
