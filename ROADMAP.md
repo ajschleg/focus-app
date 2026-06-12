@@ -1,7 +1,7 @@
 # FocusSlice — v1 release roadmap
 
 > One line per feature below the tracker; full specs live in their own docs
-> (CONCEPT.md, CLASSES.md, ios/README.md). Update the checklist as statuses
+> (CONCEPT.md, CLASSES.md, ART.md, ios/README.md). Update the checklist as statuses
 > flip — this is the single place to see distance-to-release.
 
 ## Progress to release
@@ -66,4 +66,4 @@ friends should be company, not comparison.
 ### Art — Not started (style guide ready)
 Replace placeholder SF symbols with real artwork: the ten ladder ranks and
 the 30 class figures. Style guide, per-class briefs, and an image-model
-prompt template are ready in CLASSES.md §6; the app icon already exists.
+prompt template are ready in ART.md; the app icon already exists.
