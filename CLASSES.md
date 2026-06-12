@@ -34,7 +34,7 @@ their ladder level to form a title: **"Novice Warrior", "Disciple Monk",
 
 ### Why breaks carry the class
 
-Most of the class data comes from breaks and off-app life — three of the five
+Most of the class data comes from breaks and off-app life — five of the seven
 axes are fed almost entirely by break recaps, and Body mostly by HealthKit.
 That's by design, not drift. During a focus block there's only one thing you
 should be doing, so focus can't differentiate identity — it's already fully
@@ -88,17 +88,23 @@ class is computed from (and future-proofs stats screens):
 Local only (a JSON file on device), like everything else in the app. No
 account, no upload; HealthKit data never leaves the device.
 
-## 5. Affinity: five axes
+## 5. Affinity: seven axes
 
-Every Chronicle entry drops **marks** on one of five axes:
+Every Chronicle entry drops **marks** on one of seven axes:
 
 | Axis (internal name) | The fantasy | Fed by |
 |---|---|---|
-| **Body** | strength, movement | exercise quest (2 marks — it's a verified workout), recap: exercised / walked / stretched |
-| **Mind** | study, discipline | completed focus block (1), Clean sweep (1), Stillness check (1), recap: read / meditated |
-| **Craft** | making things | recap: drew, wrote, played music, DIY |
-| **Heart** | people | recap: talked with coworkers, called a friend, family time, played with a pet |
-| **Hearth** | home & self-care | Hydrate quest (1), recap: watered plants, chores, cooked, coffee/tea ritual |
+| **Body** | strength, movement | exercise quest (2 marks — verified workout), recap: exercised / stretched / walked / danced |
+| **Mind** | study, learning | completed focus block (1), Clean sweep (1), recap: read / practiced a language / puzzles & chess / listened to something that teaches |
+| **Spirit** | stillness, the inner life | Stillness check (1), recap: meditated / breathwork / journaled / yoga / sat and did nothing |
+| **Craft** | making things | recap: drew or painted / wrote / played music / photography / DIY & handiwork |
+| **Heart** | people | recap: talked with coworkers / called a friend or family / played with a pet / helped someone / volunteered |
+| **Hearth** | home & self-care | Hydrate quest (1), recap: chores & tidying / cooked or baked / coffee-tea ritual / ran an errand |
+| **Wild** | green & growing things | recap: watered the plants / gardened / sat outside / hiked / watched the birds |
+
+Splitting five axes into seven (Spirit out of Mind, Wild out of Hearth) is
+what buys the bigger roster below: meditation no longer hides inside "study",
+and gardening no longer counts as a chore.
 
 **Affinity = decay-weighted mark count.** Each mark's weight halves every 7
 days (`0.5^(age/7d)`), so ~2 weeks of inactivity fades an axis to a whisper.
@@ -122,12 +128,16 @@ Traveler.)*
 |---|---|---|
 | **Warrior** | Body | Body affinity ≥ 4 and ≥ 1.6× the runner-up |
 | **Scholar** | Mind | same shape, Mind on top |
+| **Mystic** | Spirit | same shape, Spirit on top *(alts: Oracle, Dreamer)* |
 | **Artisan** | Craft | same shape, Craft on top |
 | **Bard** | Heart | same shape, Heart on top |
-| **Keeper** | Hearth | same shape, Hearth on top *(alts: Steward, Druid)* |
+| **Keeper** | Hearth | same shape, Hearth on top *(alt: Steward)* |
+| **Druid** | Wild | same shape, Wild on top |
 
 "Affinity ≥ 4" ≈ four marks this week, or a steadier trickle across two.
-The 1.6× dominance gap is what separates a base class from a hybrid.
+With seven axes spreading marks thinner, the awake bar may need to drop to 3
+— tune by feel. The 1.6× dominance gap is what separates a base class from a
+hybrid.
 
 ### Hybrid classes — two axes within 0.6× of each other, both awake
 
@@ -135,17 +145,38 @@ Requires ladder level ≥ 3 (Disciple) — below that the dominant base class
 shows. This is the "traverse by level" hook: early game stays simple, hybrids
 read as an earned deepening.
 
-| | **Mind** | **Craft** | **Heart** | **Hearth** |
-|---|---|---|---|---|
-| **Body** | Monk | **Wizard** | Paladin | Ranger |
-| **Mind** | — | Artificer | Mentor *(alt: Oracle)* | Alchemist |
-| **Craft** | — | — | Jester *(alts: Storyteller, Minstrel)* | Tinker |
-| **Heart** | — | — | — | Innkeeper *(alt: Host)* |
+| | **Mind** | **Spirit** | **Craft** | **Heart** | **Hearth** | **Wild** |
+|---|---|---|---|---|---|---|
+| **Body** | Monk | Templar | **Wizard** | Paladin | Blacksmith | Ranger |
+| **Mind** | — | Philosopher | Artificer | Mentor | Alchemist | Naturalist |
+| **Spirit** | — | — | Calligrapher | Cleric | Candlekeeper | Shaman |
+| **Craft** | — | — | — | Jester | Tinker | Herbalist |
+| **Heart** | — | — | — | — | Innkeeper | Shepherd |
+| **Hearth** | — | — | — | — | — | Homesteader |
+
+*(Alternatives for contested cells: Templar → Warden · Mentor → Oracle ·
+Cleric → Healer · Candlekeeper → Abbot, Lamplighter · Shaman → Hermit ·
+Jester → Storyteller, Minstrel · Blacksmith → Squire · Innkeeper → Host.)*
 
 Wizard is the canonical example: lift weights, draw on your breaks → "you
-become a wizard." Alchemist falls out charmingly (deep focus + tea ritual);
-Innkeeper too (chats + chores). Sample titles: *Disciple Monk, Adept
-Alchemist, Ascetic Wizard, Elder Innkeeper.*
+become a wizard." New favorites fall out naturally: **Alchemist** (deep focus
++ tea ritual), **Calligrapher** (art + stillness), **Homesteader** (cooking +
+garden), **Shepherd** (people + outdoors), **Naturalist** (study + green
+things), **Candlekeeper** (home ritual + quiet). Sample titles: *Disciple
+Monk, Adept Alchemist, Pilgrim Naturalist, Ascetic Calligrapher, Elder
+Homesteader, Enlightened Shaman.*
+
+All told: 7 base + 21 hybrids + Wanderer = **29 titles**.
+
+### Later (v2 sketch): epithets
+
+When a single activity supplies most of the top axis (say ≥ 60% of its
+marks), the base name could sharpen into an epithet: a Scholar who mostly
+practices languages becomes a **Linguist**, a Keeper who mostly cooks a
+**Chef**, an Artisan who mostly writes a **Wordsmith**, a Bard who's all pet
+time a **Beastfriend**. Pure renames over the same data — variety scales with
+the activity vocabulary instead of new mechanics. Deliberately not v1: the
+roster above should prove itself first.
 
 ### Assignment rules, in order
 
@@ -171,9 +202,12 @@ deliberately not in v1 until drift proves too slow or too fast.)
 
 "What do you do in your free time?" — pick up to 3 chips:
 
-> exercise & sports · walks outside · draw / write / make music · DIY & crafts
-> · reading & learning · games & puzzles · gardening & plants · cooking &
-> baking · time with friends & family
+> exercise & sports · walks & runs · reading & learning · languages &
+> puzzles · meditation & mindfulness · journaling & quiet time · art, music
+> & writing · DIY & crafts · friends & family · time with pets · cooking &
+> baking · tidying & home projects · gardening & plants · hiking & nature
+
+(Two chips per axis, fourteen total — still one screen, still pick up to 3.)
 
 Each chip seeds ~3 marks on its axis — a two-week head start that **decays
 like any other mark**, so the quiz biases the opening portrait and then real
@@ -184,8 +218,12 @@ behavior takes over. Skip → zero marks → Wanderer. Asked once, never again.
 When a break ends (only a real one — skipped breaks get no recap), the review
 screen opens with one row of bubbles: *"What did you get up to?"*
 
-> exercised · walked · stretched · art · read · meditated · watered plants ·
-> chores · cooked · coffee/tea · talked with someone · scrolled my phone
+The full bubble vocabulary is the recap column of the axis table (§5), plus
+the no-axis honesty bubble *scrolled my phone*. Showing twenty-odd bubbles
+every time would be homework, so the recap shows **nine**: the player's six
+most-tapped, two drawn from the sleepiest axes (the nudge surface working
+quietly — §8), and *scrolled my phone* — with a "more…" chip expanding the
+rest.
 
 Tap up to 3, or ignore it — it's a section of the review screen, not a modal
 gate. No coins (pillar 5); each tap is one mark. The bubble list is one
@@ -194,8 +232,9 @@ data table, easy to extend.
 ### Existing automatic signals (no new interaction)
 
 Focus blocks → Mind. The exercise quest → Body (HealthKit-verified, hence the
-double mark). Hydrate → Hearth. Clean sweep / Stillness → Mind. The class has
-a pulse even for a player who skips every prompt — pillar 2.
+double mark). Hydrate → Hearth. Clean sweep → Mind; Stillness check → Spirit
+(it is literally stillness). The class has a pulse even for a player who
+skips every prompt — pillar 2.
 
 ## 8. Nudges (the "slightly healthier" lean)
 
@@ -208,6 +247,8 @@ Checked weekly, at most **one nudge active at a time**, never stacking:
 - Ignored three weeks running → that nudge goes quiet for a month. The lean
   is always a *bonus*, never a penalty — nothing is lost by ignoring it
   (pillar 4, CONCEPT.md §5's dark-pattern line).
+- Quietest of all: the recap's two sleepy-axis bubble slots (§7). No banner,
+  no bonus — the option is simply *there*, suggesting itself.
 
 Mind needs no nudge; the core loop is the Mind nudge.
 
@@ -234,7 +275,16 @@ Mind needs no nudge; the core loop is the Mind nudge.
    on total marks instead of level.
 5. **Pursue-a-class pin** (explicit switching) — v2 as proposed, or v1?
 6. **Should the exercise quest's double mark extend to other verified
-   signals later** (e.g., mindful minutes from HealthKit → Mind)?
+   signals later** (e.g., mindful minutes from HealthKit → Spirit)?
+7. **Seven axes — the right grain?** Five felt cramped once meditation,
+   languages, gardening, and pets arrived; nine would be a horoscope. The
+   borderline call: pets under Heart (companionship) or Wild (animals)?
+8. **Name flavor comfort.** Templar, Cleric, Shaman, Monk lean on real
+   traditions — fine for the audience, or swap for the secular alternatives
+   listed under the matrix?
+9. **Recap subset size.** Nine visible bubbles (six habitual + two sleepy +
+   honesty) — right amount, or fewer?
+10. **Epithets** — v2 as sketched, or pull into v1 since variety is the goal?
 
 ## 11. Implementation sketch (when approved)
 
