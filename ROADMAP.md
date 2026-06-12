@@ -1,7 +1,7 @@
 # FocusSlice — v1 release roadmap
 
 > One line per feature below the tracker; full specs live in their own docs
-> (CONCEPT.md, CLASSES.md, ART.md, QUESTS.md, ios/README.md). Update the checklist as statuses
+> (CONCEPT.md, CLASSES.md, ART.md, QUESTS.md, CURRENCY.md, ios/README.md). Update the checklist as statuses
 > flip — this is the single place to see distance-to-release.
 
 ## Progress to release
@@ -52,10 +52,11 @@ your ladder rank. Spec agreed in CLASSES.md; build order: Chronicle →
 ClassEngine (+ §12 tests) → break recap → badge/ⓘ → first-class ceremony,
 with the lifestyle quiz last as the ship gate.
 
-### Currency (the spend side) — Not started
-Coins currently only accumulate. v1 needs the sink that closes the economy:
-spending coins on guilt-free break/phone time (CONCEPT.md §5A, §6's free
-track). Needs concept work on what's purchasable and at what prices.
+### Currency (the spend side) — Design drafted, not started
+Coins currently only accumulate. v1 adds the sink that closes the economy:
+per-minute earning plus two purchases — Long rest (extend the break) and
+Furlough (pre-armed phone window during focus). Spec in CURRENCY.md,
+awaiting sign-off.
 
 ### Friends — Not started
 Needs concept work: what "friends" means here (shared presence? co-focus
