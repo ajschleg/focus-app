@@ -32,6 +32,31 @@ their ladder level to form a title: **"Novice Warrior", "Disciple Monk",
    no incentive to lie, so the portrait stays honest and the recap stays
    guilt-free.
 
+### Why breaks carry the class
+
+Most of the class data comes from breaks and off-app life — three of the five
+axes are fed almost entirely by break recaps, and Body mostly by HealthKit.
+That's by design, not drift. During a focus block there's only one thing you
+should be doing, so focus can't differentiate identity — it's already fully
+measured by the score and the ladder. Variety lives in the breaks, so that's
+where a portrait of *you* has to come from: **the ladder is what your focus
+earns; the class is who you are between blocks.** This is also the deepest
+implementation yet of CONCEPT.md's two break claims — breaks as first-class
+(§6, the category differentiator) and rewarding proper breaks over grinding
+(§5) — without adding a single coin to the break itself.
+
+It stays a *focus* app because breaks are downstream of focus in the economy:
+you can't take a break you didn't earn, and an early quit shrinks it, so the
+recap moment — and all the class data flowing from it — only exists at the
+rate you focus. Focus is the gate; breaks are the reward; the class is the
+story the rewards tell.
+
+Watch-item: the recap must never become break homework. No-coins and
+skippability protect that today; if later class value (art, perks) makes
+bubble-tapping feel worth optimizing, the fix is weighting verified signals
+(HealthKit and whatever else syncs passively) above self-reports, so the
+class keeps tracking life rather than diligent tapping.
+
 ## 3. The two tracks: ladder × class
 
 The existing monk's ladder (CONCEPT.md §5D, `Levels.swift`) is untouched — it
