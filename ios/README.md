@@ -56,7 +56,9 @@ is a base class — subclass it, override the lifecycle hooks (`focusStarted`,
 `focusTicked`, `distractionRecorded`, `blockFinished`, `workoutLogged`), and
 call `complete()` / `fail()`; `QuestBoard` relays the engine's published
 state into those hooks and pays into `CoinStore` on completion, so new quests
-never touch block logic. Four starter quests, one per pattern:
+never touch block logic. The catalog — every quest's trigger, reward, and
+affinity — lives in `QUESTS.md` at the repo root. Four starter quests, one
+per pattern:
 
 - **Hydrate** (pre-focus prompt, self-report) — pops as a sheet when you tap
   "Start focus": Done pays +5 and the block starts either way (skipped offers

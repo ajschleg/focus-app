@@ -113,7 +113,8 @@ Every Chronicle entry drops **marks** on one of seven axes:
 
 Splitting five axes into seven (Spirit out of Mind, Wild out of Hearth) is
 what buys the bigger roster below: meditation no longer hides inside "study",
-and gardening no longer counts as a chore.
+and gardening no longer counts as a chore. (Quest mechanics — triggers,
+rewards, player copy — live in QUESTS.md, the quest source of truth.)
 
 **Affinity = decay-weighted mark count.** Each mark's weight halves every 7
 days (`0.5^(age/7d)`), so ~2 weeks of inactivity fades an axis to a whisper.

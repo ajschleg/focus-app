@@ -1,7 +1,7 @@
 # FocusSlice — v1 release roadmap
 
 > One line per feature below the tracker; full specs live in their own docs
-> (CONCEPT.md, CLASSES.md, ART.md, ios/README.md). Update the checklist as statuses
+> (CONCEPT.md, CLASSES.md, ART.md, QUESTS.md, ios/README.md). Update the checklist as statuses
 > flip — this is the single place to see distance-to-release.
 
 ## Progress to release
