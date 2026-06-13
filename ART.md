@@ -109,3 +109,50 @@ precedent, echoing the class-art style once it's chosen. Fixtures render in
 code with slight variation seeded by purchase date. If the figure set ever
 raises the bar, the Courtyard can graduate to real illustration without
 touching mechanics.
+
+## 7. Animation (planned)
+
+> Status: planned, not built. Animated figures are made *from* the static
+> ones (image-to-video) and played at specific moments. The static image is
+> always the fallback, so an un-animated class still works everywhere — a
+> half-animated set ships fine, exactly like the static art does today.
+
+### Trigger moments
+
+| Moment | Where (code) | Motion character |
+|---|---|---|
+| **Class info** | `ClassDetailView` — the ⓘ reveal (PlanView) | The showcase. The figure's full signature motion, looping, undimmed — this is where the art performs. |
+| **Gaining a class** | `FirstClassCeremonyView` — the day Wanderer ends | A one-time reveal flourish that settles into the loop. The most ceremonial moment in the app. |
+| **Leveling up** | `ReviewView` → `LevelVerdict` on promotion | A brief celebratory flourish, then calm. (Demotions stay still — no animation for a slip.) |
+| **Focusing** | `FocusView` background, during a block | Calm by rule. A slow ambient drift only — it sits behind a running timer, so it must never pull the eye. When in doubt, less. |
+
+### Motion character
+
+- **Seamless loops** — last frame meets first frame so the idle never hitches.
+- **Intensity by moment:** focus is the calmest (ambient drift), info is full
+  expression, ceremony and level-up are momentary bursts that then settle.
+  One class can reuse a single loop across moments at different speeds/dim.
+
+### Format & delivery
+
+- **Video, not frame sequences.** HEVC `.mov`, looped with
+  `AVPlayer` / `AVPlayerLooper`. Use **HEVC-with-alpha** only if a figure must
+  sit *over* the background; the class art currently *fills* the background,
+  so full-frame opaque clips are the default and simplest.
+- **Bundle resources, not the asset catalog** (catalogs don't loop video): a
+  `ClassMotion/` group, one clip per class named to mirror `ClassArt` —
+  `ClassMotion/Wizard.mov`. A name lookup picks the clip up with no code
+  change, just like the static figures (pillar 6).
+- **One ambient loop per class is the baseline.** Dedicated reveal/flourish
+  clips for the ceremony and level-up are optional per class — when absent,
+  those moments play the ambient loop (or the static image).
+
+### Rules
+
+- **Fallback chain:** animated clip → static PNG → SF-symbol placeholder.
+  Any rung missing falls through to the next, so the app always renders.
+- **Respect Reduce Motion.** When the accessibility setting is on, show the
+  static image instead of playing — never override the user's preference.
+- **Cheap to run:** short compressed loops; play only while on-screen; pause
+  off-screen and when the app backgrounds, so motion never costs battery
+  behind a locked phone or a scrolled-away view.
