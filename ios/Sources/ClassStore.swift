@@ -45,6 +45,9 @@ final class ClassStore: ObservableObject {
     /// Recompute from the Chronicle. Called on every new entry, on ladder
     /// movement, and when the app foregrounds (a new day may have dawned).
     func refresh(asOf: Date = Date()) {
+        #if DEBUG
+        if debugSelection != nil { return }   // a forced class stands until cleared
+        #endif
         let result = ClassEngine.adoptedClass(entries: chronicle.entries, asOf: asOf,
                                               levelNumber: experience.levelNumber)
         verdict = result.verdict
@@ -84,4 +87,23 @@ final class ClassStore: ObservableObject {
         defaults.set(current.name, forKey: Self.announcedKey)
         shift = nil
     }
+
+    #if DEBUG
+    // MARK: - Debug roster switcher (stripped from release builds)
+
+    /// The forced class, if any. While set, `refresh()` is inert so chronicle
+    /// changes can't clobber the selection — purely for art-testing the set.
+    @Published private(set) var debugSelection: FocusClass?
+
+    func debugSet(_ focusClass: FocusClass) {
+        debugSelection = focusClass
+        current = focusClass
+    }
+
+    /// Drop the override and recompute the real class from the Chronicle.
+    func debugClear() {
+        debugSelection = nil
+        refresh()
+    }
+    #endif
 }

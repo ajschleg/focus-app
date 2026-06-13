@@ -99,6 +99,23 @@ enum ClassRoster {
         }
     }
 
+    #if DEBUG
+    /// Every displayable class, for the debug roster switcher: Wanderer,
+    /// the Ascetic epithet, the 7 base classes, then the 21 hybrids (each
+    /// unordered pair once) — 30 in all.
+    static var debugAll: [FocusClass] {
+        var list = [wanderer, ascetic]
+        list += Axis.allCases.map { base[$0]! }
+        let axes = Axis.allCases
+        for i in axes.indices {
+            for j in axes.indices where j > i {
+                list.append(hybrid(axes[i], axes[j]))
+            }
+        }
+        return list
+    }
+    #endif
+
     /// Render a verdict against the ladder gate: hybrids need level ≥ 3
     /// (Journeyman); below it, the dominant base class shows — without the
     /// epithet recheck, plain base only.

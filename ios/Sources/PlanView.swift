@@ -31,6 +31,10 @@ struct PlanView: View {
                     PathShiftCard(from: shift.from, to: shift.to) { classes.shiftSeen() }
                 }
 
+                #if DEBUG
+                DebugClassPicker(classes: classes)
+                #endif
+
                 HStack(spacing: 8) {
                     StatChip(text: "\(experience.total) XP", systemImage: "sparkles", tint: .secondary)
                     StatChip(text: "\(coins.balance)", systemImage: "f.circle.fill", tint: .orange)
@@ -340,6 +344,37 @@ private struct PathShiftCard: View {
         .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
     }
 }
+
+#if DEBUG
+/// Debug-only roster switcher: force the displayed class to any of the 30
+/// so the background and title can be checked without grinding real
+/// Chronicle data. Stripped from release builds. Classes without artwork
+/// yet fall back to the level-tint wash, which is itself worth seeing.
+private struct DebugClassPicker: View {
+    @ObservedObject var classes: ClassStore
+
+    var body: some View {
+        Menu {
+            Button {
+                classes.debugClear()
+            } label: {
+                Label("Live (real class)", systemImage: "bolt.fill")
+            }
+            Divider()
+            ForEach(ClassRoster.debugAll, id: \.name) { focusClass in
+                Button(focusClass.name) { classes.debugSet(focusClass) }
+            }
+        } label: {
+            Label(classes.debugSelection.map { "Debug: \($0.name)" } ?? "Debug: pick class",
+                  systemImage: "testtube.2")
+                .font(.caption.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(.quaternary, in: Capsule())
+        }
+    }
+}
+#endif
 
 /// A small capsule for the header totals (XP, focus coins).
 private struct StatChip: View {
