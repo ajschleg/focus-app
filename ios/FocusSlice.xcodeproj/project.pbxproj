@@ -55,7 +55,7 @@
 		427D218E8C2D8E574CE62870 /* ClassEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEngine.swift; sourceTree = "<group>"; };
 		42C9DFF012FA1A3C0AFF976E /* ClassStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassStore.swift; sourceTree = "<group>"; };
 		47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetector.swift; sourceTree = "<group>"; };
-		53D35695691BA5F108AE0BA1 /* FocusSliceTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = FocusSliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D35695691BA5F108AE0BA1 /* FocusSliceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FocusSliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5433E531572CE9A025A31B6B /* WorkoutMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutMonitor.swift; sourceTree = "<group>"; };
 		544CB7114CCC3AFD1C56AEBD /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		62044C9F11E4B816A926D065 /* FirstClassCeremonyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstClassCeremonyView.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		6A1EBF6BC6B0E55F2C85923D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73AC73B776085CC741AE7090 /* CoinStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStore.swift; sourceTree = "<group>"; };
 		7888F3CE7E2D88D08997748C /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
-		7E2B2B725CFBD3D5861C283D /* FocusSlice.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusSlice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E2B2B725CFBD3D5861C283D /* FocusSlice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusSlice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864A7B1C2E938C28662021D0 /* ExperienceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceStore.swift; sourceTree = "<group>"; };
 		A352E47D58681BE629FF2D3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AB26F535636FF8220E41451F /* BreakPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPromptView.swift; sourceTree = "<group>"; };
@@ -123,6 +123,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		6EE576E32FDDE9FE007CD0BA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		940B7F41F0A5E565F4D1AF6E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,15 +147,8 @@
 				08993A6005BAFC6D54628CE3 /* Sources */,
 				3634544B6FAC934A5CE9CC62 /* Tests */,
 				940B7F41F0A5E565F4D1AF6E /* Products */,
+				6EE576E32FDDE9FE007CD0BA /* Recovered References */,
 			);
-			sourceTree = "<group>";
-		};
-		"TEMP_03DF2872-E666-4C4D-8262-C6BC7E7A1BEA" /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				"TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */,
-			);
-			path = ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +197,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					AF118D114306B521263E1D33 = {
 						ProvisioningStyle = Automatic;
@@ -329,6 +330,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -350,6 +352,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -420,6 +423,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -434,6 +438,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;

@@ -21,13 +21,14 @@ struct ContentView: View {
             case .review:      ReviewView()
             }
         }
-        // The current level colors the whole app: every accent, button, and
-        // selection ring follows the ladder via tint, and the background
-        // carries a wash of the same color (FocusLevel.tint).
-        .background(LevelBackground(tint: experience.level.tint))
+        // The current class's artwork is the app's backdrop (scrimmed for
+        // legibility); accents still follow the ladder tint. Classes without
+        // art fall back to the level-tint wash.
+        .background(ClassBackground(focusClass: classes.current, tint: experience.level.tint))
         .tint(experience.level.tint)
-        // Cross-fade the scheme when a promotion/demotion lands.
+        // Cross-fade when a promotion/demotion or a class change lands.
         .animation(.easeInOut(duration: 0.8), value: experience.levelIndex)
+        .animation(.easeInOut(duration: 0.8), value: classes.current.name)
         .onChange(of: scenePhase) { _, newPhase in
             // Going to .background while focusing is the "I got distracted /
             // left the app" signal (no entitlement needed). The engine filters
@@ -46,6 +47,35 @@ struct ContentView: View {
                 board.refreshOffers()
                 classes.refresh()   // a new day may have dawned on the title
             }
+        }
+    }
+}
+
+/// The current class's artwork as a full-bleed app background, veiled so
+/// foreground text and controls stay legible in both light and dark mode —
+/// the veil deepens toward the bottom, where the pinned action buttons live.
+/// Falls back to the level-tint wash when the class has no art yet.
+private struct ClassBackground: View {
+    let focusClass: FocusClass
+    let tint: Color
+
+    var body: some View {
+        if ClassArtwork.exists(for: focusClass) {
+            Color.clear
+                .overlay(
+                    Image(focusClass.artworkName)
+                        .resizable()
+                        .scaledToFill()
+                )
+                .overlay(
+                    LinearGradient(colors: [Color(.systemBackground).opacity(0.45),
+                                            Color(.systemBackground).opacity(0.82)],
+                                   startPoint: .top, endPoint: .bottom)
+                )
+                .clipped()
+                .ignoresSafeArea()
+        } else {
+            LevelBackground(tint: tint)
         }
     }
 }
