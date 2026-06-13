@@ -5,43 +5,40 @@
 > scope (ROADMAP.md "Art"); the briefs wait for the art pass, whether
 > that's hand-drawn or AI-generated.
 
-## 1. The style
+## 1. The style — undecided
 
-**Illuminated-manuscript figures with a modern wink.** Each class is one
-full-body figure rendered as a plate from a medieval illuminated manuscript
-(or an Elder Scrolls in-game book) — hand-inked woodcut linework with
-ink-wash shading, aged vellum ground, no background beyond a soft ground
-shadow. The figures wear **medieval dress** (tunics, cloaks, robes, hoods,
-simple leather and cloth); the wink is in their *equipment* — every figure
-carries a **modern everyday object as fantasy gear** (a dumbbell as a
-warhammer, a pour-over rig as an alembic, headphones as a circlet). That
-contrast — a properly medieval adventurer holding your real week's objects —
-is the system's whole joke (your real week, painted as legend).
+The rendering style is being chosen; nothing here locks it. What's fixed is
+independent of style:
 
-*Rendering:* generate in **monochrome sepia** — the app applies one flat
-accent color per figure (the class tint) the way `LevelBackground` and the
-root `.tint()` already recolor everything, so the figures stay recolorable
-and asset-light. Vellum ground in light mode swaps to slate in dark, and the
-silhouette must still read at badge size (~84 pt).
+- **One full-body figure per class**, centered and fully in frame, no
+  background beyond a soft ground shadow.
+- **The modern-object fusion** (content, not style): every figure carries a
+  modern everyday object as fantasy gear — a dumbbell as a warhammer, a
+  pour-over rig as an alembic, headphones as a circlet. This is the class
+  system's whole joke (your real week, painted as legend) and holds whatever
+  the rendering turns out to be.
+- **Reads at badge size** (~84 pt) and **works in light and dark mode**.
+
+Open questions to settle before drawing: the medium (ink wash, woodcut,
+painterly, flat vector, pixel, …); the dress (period or modern); and whether
+to generate **monochrome** so the app applies the class tint (recolorable,
+asset-light, the way `LevelBackground` and the root `.tint()` already work)
+or commit to **full color** per figure. Fold the answers into §2 once
+chosen.
 
 ## 2. The prompt template
 
-Style guide + brief composed into one prompt, ready for an image model.
-Keep it identical across all 30 so the set stays consistent, varying only
-the bracketed parts:
+A skeleton for whatever image model you use. Fill `[STYLE]` once §1's open
+questions are settled, then keep it identical across all 30 so the set stays
+consistent, varying only the bracketed parts:
 
-> Full-body [CLASS] character plate from an illuminated medieval manuscript:
-> [BRIEF]. Figure in medieval dress; the equipment is a modern everyday
-> object carried as fantasy gear. Hand-inked woodcut linework with ink-wash
-> shading, aged vellum, illuminated-manuscript style, warm monochrome sepia,
-> soft ground shadow, strong readable silhouette, centered and fully in
-> frame. --style raw --ar 2:3 --s 80 --no color, text, watermark, border,
-> frame, busy background, multiple characters, photorealism, modern
-> clothing, hoodie, sneakers
+> Full-body [CLASS] figure: [BRIEF]. [STYLE — medium, dress, palette]. Soft
+> ground shadow, strong readable silhouette, centered and fully in frame. No
+> text, no watermark, no busy background, no multiple figures.
 
-The figures are monochrome (the app tints them), so no accent color goes in
-the prompt. `--no modern clothing, hoodie, sneakers` keeps the *dress*
-medieval while the named object stays modern — that fusion is the point.
+Consistency is the hard part of a generated set: reuse the template
+verbatim, and where the tool supports it (e.g. Midjourney `--sref`), pin a
+style reference (the first accepted image) for the remaining 29.
 
 Consistency is the hard part of a generated set: reuse the template
 verbatim, and where the tool supports it, pin a style reference (the first
@@ -50,11 +47,9 @@ accepted image) for the remaining 29.
 ## 3. Class figure briefs (all DRAFT)
 
 One brief per roster entry (CLASSES.md §6). The roster rule lives there: a
-class isn't done without its why-line and its brief here. Clothing
-convention: every figure wears medieval dress; where a brief names a modern
-garment, read it as the medieval equivalent (a hooded robe, a craftsman's
-smock, a tunic). The *object* a figure carries stays modern — that's the
-fusion.
+class isn't done without its why-line and its brief here. The briefs are
+pose + object only — the rendering medium and dress are set in §2 once the
+style is chosen.
 
 | Class | Figure brief |
 |---|---|
@@ -63,11 +58,11 @@ fusion.
 | Scholar | Perched on a book stack, paperback in hand, flashcards fanned in the belt. |
 | Ascetic | Hooded, seated; the phone lies face-down before them like a surrendered blade. |
 | Mystic | Cross-legged on a cushion, hood back, breath-steam rising in a slow spiral. |
-| Artisan | Leather apron over a tunic, stylus raised like a wand, paint-flecked sleeves. |
+| Artisan | Apron, stylus raised like a wand, paint-flecked sleeves. |
 | Bard | Phone tucked to shoulder like a fiddle, free hand mid-story, two coffees waiting. |
 | Keeper | Broom shouldered like a halberd, keyring at the hip, kettle steaming at the feet. |
 | Druid | Watering can held like a censer, vines climbing one sleeve, trowel sheathed. |
-| Monk | Hooded monk's robes, wrapped hands, a book tucked into the belt sash. |
+| Monk | Robes, wrapped hands, a book tucked into the belt sash. |
 | Templar | Yoga mat slung as a kite shield, water-bottle mace at the belt. |
 | Wizard | Brush raised like a staff, headphones for a circlet, gym-bag familiar at heel. |
 | Paladin | Race medal worn as the holy amulet, one arm hauling a second figure up. |
@@ -93,10 +88,10 @@ fusion.
 
 The ten guild ranks (Novice → Paragon) currently wear placeholder SF
 symbols and tints — both live in `FocusLevel.ladder` (ios/Sources/
-Levels.swift), so swapping in real art is a one-table edit. Direction: the
-same ink-and-wash family as the class figures, but emblems rather than
-figures (a rank is a badge, not a person); each keeps its existing tint as
-the accent. Per-rank briefs not yet drafted.
+Levels.swift), so swapping in real art is a one-table edit. Direction:
+emblems rather than figures (a rank is a badge, not a person), in the same
+style as the class figures once that's chosen; each keeps its existing tint.
+Per-rank briefs not yet drafted.
 
 ## 5. App icon (exists)
 
@@ -108,8 +103,9 @@ guide; revisit for consistency once the figure set exists.
 ## 6. The Courtyard (code-drawn, no assets)
 
 The coin sink's scene (CURRENCY.md §4) is deliberately **not** illustration
-work: a parametric SwiftUI drawing in this guide's family — flat shapes,
-ink-line feel, one accent color (the level tint), light/dark aware — per
-the app-icon-script precedent. Fixtures render in code with slight
-variation seeded by purchase date. If the figure set ever raises the bar,
-the Courtyard can graduate to real illustration without touching mechanics.
+work: a parametric SwiftUI drawing — flat shapes drawn in code, one accent
+color (the level tint), light/dark aware — per the app-icon-script
+precedent, echoing the class-art style once it's chosen. Fixtures render in
+code with slight variation seeded by purchase date. If the figure set ever
+raises the bar, the Courtyard can graduate to real illustration without
+touching mechanics.

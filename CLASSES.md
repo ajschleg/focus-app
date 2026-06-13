@@ -221,10 +221,10 @@ so they read as a family; hybrids get their own cadence.
 
 ### Class art (single source of truth: ART.md)
 
-The art direction — Oblivion-manual figures, modernized — plus all 30
-per-class figure briefs and the image-model prompt template live in
-**ART.md**. The roster rule stays here (pillar 6): a class isn't done
-without its why-line and its ART.md brief. Not v1 scope (§9).
+The art direction (style still being chosen) plus all 30 per-class figure
+briefs and the image-model prompt template live in **ART.md**. The roster
+rule stays here (pillar 6): a class isn't done without its why-line and its
+ART.md brief. Not v1 scope (§9).
 
 ### Epithets (one ships in v1, the rest later)
 
