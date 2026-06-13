@@ -7,6 +7,12 @@ struct FocusClass: Equatable {
     let name: String
     let whyLine: String
     let systemImage: String
+
+    /// Asset name for this class's artwork, looked up in the `ClassArt`
+    /// catalog namespace. Drop a PNG named for the class (e.g.
+    /// "Wanderer.png") into Assets.xcassets/ClassArt to light it up — no
+    /// code change (pillar 6). Absent → the `systemImage` placeholder shows.
+    var artworkName: String { "ClassArt/\(name)" }
 }
 
 /// The affinity-driven identity, before the ladder gate is applied. This is

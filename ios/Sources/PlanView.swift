@@ -229,13 +229,20 @@ private struct LevelBadge: View {
     var body: some View {
         let level = experience.level
         VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(level.tint.opacity(0.15))
-                    .frame(width: 84, height: 84)
-                Image(systemName: level.systemImage)
-                    .font(.system(size: 36))
-                    .foregroundStyle(level.tint)
+            // The class portrait is the hero when its art exists; otherwise
+            // the ladder rank's placeholder symbol, as before. (The title
+            // text below still names both rank and class either way.)
+            if ClassArtwork.exists(for: classes.current) {
+                ClassArtwork(focusClass: classes.current, maxHeight: 200)
+            } else {
+                ZStack {
+                    Circle()
+                        .fill(level.tint.opacity(0.15))
+                        .frame(width: 84, height: 84)
+                    Image(systemName: level.systemImage)
+                        .font(.system(size: 36))
+                        .foregroundStyle(level.tint)
+                }
             }
             HStack(spacing: 6) {
                 Text("Level \(experience.levelNumber) · \(level.name) \(classes.current.name)")

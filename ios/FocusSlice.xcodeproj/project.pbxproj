@@ -24,6 +24,7 @@
 		AEB3032A1FDF1E38D489AF1B /* ClassEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136112825C6CE978412EAD08 /* ClassEngineTests.swift */; };
 		AEBDFBC19D4AC6B7DD0322A0 /* BreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B976461D3698E84E0FFF277 /* BreakView.swift */; };
 		B19B6ACDFCD8C4B8E0EAEDDB /* QuestBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */; };
+		B4592602B73EA20AE95B7159 /* ClassArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA101C165C6E1FBC3144B1F3 /* ClassArtwork.swift */; };
 		B8F4AD2AD9D91F92CF3939D0 /* BreakRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6F86958AD21318D545A1E2 /* BreakRecapView.swift */; };
 		B91063D0615D7DA61FBE3402 /* BlockNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0650365E81903B22E47911 /* BlockNotifier.swift */; };
 		C126A4349E13116DA5EDE91D /* Quests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8A92B39DAA805454A6BAA9 /* Quests.swift */; };
@@ -72,11 +73,12 @@
 		C62BB66BF7B1B69DA7683FF5 /* FocusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEngine.swift; sourceTree = "<group>"; };
 		CB0650365E81903B22E47911 /* BlockNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockNotifier.swift; sourceTree = "<group>"; };
 		D6F2366EB92CC8D1ABB57639 /* FocusSliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSliceApp.swift; sourceTree = "<group>"; };
+		DA101C165C6E1FBC3144B1F3 /* ClassArtwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassArtwork.swift; sourceTree = "<group>"; };
 		DDF91094F1743A1A5BBF30A6 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestBoard.swift; sourceTree = "<group>"; };
 		E3ED950FEF27AACBC8AAC01B /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		F8A3991C5335BEF050223DC0 /* Chronicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chronicle.swift; sourceTree = "<group>"; };
-		"TEMP_6937808C-2D5E-4BCF-BB59-34BF4DEF78C5" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -89,6 +91,7 @@
 				AD6F86958AD21318D545A1E2 /* BreakRecapView.swift */,
 				0B976461D3698E84E0FFF277 /* BreakView.swift */,
 				F8A3991C5335BEF050223DC0 /* Chronicle.swift */,
+				DA101C165C6E1FBC3144B1F3 /* ClassArtwork.swift */,
 				427D218E8C2D8E574CE62870 /* ClassEngine.swift */,
 				42C9DFF012FA1A3C0AFF976E /* ClassStore.swift */,
 				73AC73B776085CC741AE7090 /* CoinStore.swift */,
@@ -139,10 +142,10 @@
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_6CB2B540-AF44-4A0A-8244-EAC3A31C2D21" /* ios */ = {
+		"TEMP_03DF2872-E666-4C4D-8262-C6BC7E7A1BEA" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_6937808C-2D5E-4BCF-BB59-34BF4DEF78C5" /* Signing.xcconfig */,
+				"TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				B8F4AD2AD9D91F92CF3939D0 /* BreakRecapView.swift in Sources */,
 				AEBDFBC19D4AC6B7DD0322A0 /* BreakView.swift in Sources */,
 				400C8C01384EF3209E4AF878 /* Chronicle.swift in Sources */,
+				B4592602B73EA20AE95B7159 /* ClassArtwork.swift in Sources */,
 				CBDCF5DA7E37D7E346B81AAD /* ClassEngine.swift in Sources */,
 				6ACB2C5816B3ED5D235C1A6D /* ClassStore.swift in Sources */,
 				ADD9B34CB7254D6F05CBA4BE /* CoinStore.swift in Sources */,
@@ -354,7 +358,7 @@
 		};
 		4C7BEB054887AD09F8746349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_6937808C-2D5E-4BCF-BB59-34BF4DEF78C5" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
@@ -456,7 +460,7 @@
 		};
 		C2C4CE9010EE9AD21ED46767 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_6937808C-2D5E-4BCF-BB59-34BF4DEF78C5" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_614A1231-93FD-46A4-A0D5-B315A302C569" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;

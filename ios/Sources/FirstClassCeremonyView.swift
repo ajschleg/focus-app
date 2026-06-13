@@ -11,14 +11,7 @@ struct FirstClassCeremonyView: View {
         VStack(spacing: 16) {
             Spacer()
 
-            ZStack {
-                Circle()
-                    .fill(.thinMaterial)
-                    .frame(width: 132, height: 132)
-                Image(systemName: focusClass.systemImage)
-                    .font(.system(size: 56))
-                    .foregroundStyle(.tint)
-            }
+            ClassArtwork(focusClass: focusClass, maxHeight: 240, placeholderDiameter: 132)
 
             Text("You've been seen.")
                 .font(.subheadline)
