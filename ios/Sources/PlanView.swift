@@ -11,6 +11,8 @@ struct PlanView: View {
     /// The pre-focus quest being prompted (sheet) between tapping "Start
     /// focus" and the block actually starting.
     @State private var promptedQuest: Quest?
+    /// Whether the ⓘ class-detail view (full art + description) is showing.
+    @State private var showClassDetail = false
 
     var body: some View {
         ScrollView {
@@ -25,7 +27,9 @@ struct PlanView: View {
                 }
                 .padding(.top, 40)
 
-                LevelBadge(experience: experience, classes: classes)
+                LevelBadge(experience: experience, classes: classes) {
+                    withAnimation(.easeInOut(duration: 0.3)) { showClassDetail = true }
+                }
 
                 if let shift = classes.shift {
                     PathShiftCard(from: shift.from, to: shift.to) { classes.shiftSeen() }
@@ -130,6 +134,17 @@ struct PlanView: View {
                 classes.ceremonySeen()
             }
         }
+        // Full-screen class detail: the background art revealed undimmed,
+        // description in an opaque box at the bottom. Fades in over the plan
+        // screen so it reads as the scrim lifting, not a new page.
+        .overlay {
+            if showClassDetail {
+                ClassDetailView(classes: classes) {
+                    withAnimation(.easeInOut(duration: 0.3)) { showClassDetail = false }
+                }
+                .transition(.opacity)
+            }
+        }
     }
 
     /// Why a locked phone would stay silent, if iOS would currently hide our
@@ -227,8 +242,9 @@ private struct PreFocusQuestSheet: View {
 private struct LevelBadge: View {
     @ObservedObject var experience: ExperienceStore
     @ObservedObject var classes: ClassStore
-
-    @State private var showWhy = false
+    /// Tapping the ⓘ — handled by the parent so the detail view can fill the
+    /// whole screen (and reveal the background art) rather than a popover.
+    let onInfo: () -> Void
 
     var body: some View {
         let level = experience.level
@@ -247,18 +263,12 @@ private struct LevelBadge: View {
             HStack(spacing: 6) {
                 Text("Level \(experience.levelNumber) · \(level.name) \(classes.current.name)")
                     .font(.headline)
-                Button {
-                    showWhy = true
-                } label: {
+                Button(action: onInfo) {
                     Image(systemName: "info.circle")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .popover(isPresented: $showWhy) {
-                    ClassWhyCard(classes: classes)
-                        .presentationCompactAdaptation(.popover)
-                }
             }
             Text(progressLine)
                 .font(.caption)
@@ -284,33 +294,67 @@ private struct LevelBadge: View {
     }
 }
 
-/// The ⓘ popover: why-line from the roster, then receipts generated from
-/// the Chronicle — personal evidence, not canned copy. What it says about
-/// the *level* half of the title is still open (CLASSES.md §10), so it
-/// speaks only for the class.
-private struct ClassWhyCard: View {
+/// Tapping the ⓘ lifts the background scrim: the class art fills the screen
+/// undimmed, with the "why this title" copy in an opaque box pinned to the
+/// bottom. Tap the art (or the ✕) to dismiss. Receipts are generated from
+/// the Chronicle — personal evidence, not canned copy; the *level* half of
+/// the title is still open (CLASSES.md §10), so this speaks only for the
+/// class.
+private struct ClassDetailView: View {
     @ObservedObject var classes: ClassStore
+    let dismiss: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Label(classes.current.name, systemImage: classes.current.systemImage)
-                .font(.headline)
-            Text(classes.current.whyLine)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            if !classes.receipts.isEmpty {
-                Text("Driven by " + classes.receipts.joined(separator: " · "))
-                    .font(.caption)
+        ZStack(alignment: .bottom) {
+            // Full art, undimmed; tap anywhere on it to dismiss.
+            Group {
+                if ClassArtwork.exists(for: classes.current) {
+                    Image(classes.current.artworkName)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Color(.systemBackground)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipped()
+            .ignoresSafeArea()
+            .contentShape(Rectangle())
+            .onTapGesture { dismiss() }
+
+            // The description, in a fully opaque box at the bottom.
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .firstTextBaseline) {
+                    Label(classes.current.name, systemImage: classes.current.systemImage)
+                        .font(.title2.bold())
+                    Spacer()
+                    Button(action: dismiss) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title2)
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+                Text(classes.current.whyLine)
+                    .font(.subheadline)
                     .foregroundStyle(.secondary)
+                if !classes.receipts.isEmpty {
+                    Text("Driven by " + classes.receipts.joined(separator: " · "))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                if classes.isQuiet {
+                    Text("Your Chronicle has been quiet lately — this title holds until new evidence arrives.")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
-            if classes.isQuiet {
-                Text("Your Chronicle has been quiet lately — this title holds until new evidence arrives.")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 22))
+            .padding(.horizontal, 10)
+            .padding(.bottom, 10)
         }
-        .padding()
-        .frame(width: 300, alignment: .leading)
     }
 }
 
