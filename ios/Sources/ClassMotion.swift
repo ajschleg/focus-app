@@ -1,7 +1,7 @@
 import Foundation
 
 /// The moments a class animation can play (ART.md §7). Raw values are the
-/// filename suffix: `<ClassName>-<moment>.mov`.
+/// folder name under a class: `ClassMotion/<Class>/<moment>/`.
 enum ClassMotionMoment: String {
     case info       // full-screen behind the ⓘ class detail
     case focus      // scrimmed, behind a running focus block
@@ -9,18 +9,18 @@ enum ClassMotionMoment: String {
     case levelUp = "levelup"
 }
 
-/// Resolves bundled class-animation clips (ART.md §7). Clips live in
-/// Resources/ClassMotion as `<ClassName>-<moment>.mov` (or `.mp4`). A
-/// moment-specific clip wins; otherwise a class's bare `<ClassName>` clip is
-/// the ambient fallback; otherwise nil, and the caller shows the static art.
+/// Resolves bundled class-animation clips (ART.md §7). Clips are organized
+/// per class then per moment — `ClassMotion/<Class>/<moment>/<anything>.mov`
+/// — bundled as a folder reference so the structure is preserved. The first
+/// clip found in the matching folder wins (any filename, `.mov` or `.mp4`),
+/// so dropping a file into the right folder is all it takes. No clip → the
+/// caller shows the static art.
 enum ClassMotionLoader {
     static func url(_ className: String, _ moment: ClassMotionMoment) -> URL? {
-        clip("\(className)-\(moment.rawValue)") ?? clip(className)
-    }
-
-    private static func clip(_ name: String) -> URL? {
+        let dir = "ClassMotion/\(className)/\(moment.rawValue)"
         for ext in ["mov", "mp4"] {
-            if let url = Bundle.main.url(forResource: name, withExtension: ext) {
+            if let url = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: dir)?
+                .sorted(by: { $0.lastPathComponent < $1.lastPathComponent }).first {
                 return url
             }
         }

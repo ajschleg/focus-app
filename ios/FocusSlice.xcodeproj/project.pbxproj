@@ -29,6 +29,7 @@
 		B4592602B73EA20AE95B7159 /* ClassArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA101C165C6E1FBC3144B1F3 /* ClassArtwork.swift */; };
 		B8F4AD2AD9D91F92CF3939D0 /* BreakRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6F86958AD21318D545A1E2 /* BreakRecapView.swift */; };
 		B91063D0615D7DA61FBE3402 /* BlockNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0650365E81903B22E47911 /* BlockNotifier.swift */; };
+		BAFFC25E0BD1BA378BC637FE /* ClassMotion in Resources */ = {isa = PBXBuildFile; fileRef = 7B4C795BE0F224114D60384E /* ClassMotion */; };
 		C126A4349E13116DA5EDE91D /* Quests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8A92B39DAA805454A6BAA9 /* Quests.swift */; };
 		C6B8321F9CE2943C7BB292A8 /* ClassMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F560E9374619D15F0B5FA2A /* ClassMotion.swift */; };
 		CBDCF5DA7E37D7E346B81AAD /* ClassEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D218E8C2D8E574CE62870 /* ClassEngine.swift */; };
@@ -37,7 +38,6 @@
 		D3ECA2B4125051EB8CD33630 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D497AF4620EB6F17673852 /* ReviewView.swift */; };
 		DB7CAE4CF43F814B4B6B1238 /* MotionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */; };
 		E3C29ACE328E4BF4C90890DF /* FocusSliceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F2366EB92CC8D1ABB57639 /* FocusSliceApp.swift */; };
-		EDA2AF74E3C6F3ECB430E970 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EF4A378770D336144AB71228 /* README.md */; };
 		FEE683B477FCF6C1A5081226 /* FocusEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62BB66BF7B1B69DA7683FF5 /* FocusEngine.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +69,7 @@
 		70BFE9782426D28996EFEA20 /* LoopingVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoView.swift; sourceTree = "<group>"; };
 		73AC73B776085CC741AE7090 /* CoinStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStore.swift; sourceTree = "<group>"; };
 		7888F3CE7E2D88D08997748C /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		7B4C795BE0F224114D60384E /* ClassMotion */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ClassMotion; path = Resources/ClassMotion; sourceTree = SOURCE_ROOT; };
 		7E2B2B725CFBD3D5861C283D /* FocusSlice.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FocusSlice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864A7B1C2E938C28662021D0 /* ExperienceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceStore.swift; sourceTree = "<group>"; };
 		A352E47D58681BE629FF2D3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,9 +85,8 @@
 		DF3570468342E795281ECF9A /* ClassImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassImageLoader.swift; sourceTree = "<group>"; };
 		E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestBoard.swift; sourceTree = "<group>"; };
 		E3ED950FEF27AACBC8AAC01B /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
-		EF4A378770D336144AB71228 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F8A3991C5335BEF050223DC0 /* Chronicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chronicle.swift; sourceTree = "<group>"; };
-		"TEMP_CFBBADBD-4C77-443A-9616-CF05D93941E7" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -126,14 +126,6 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		15621C98F16FE636CAE3AED0 /* ClassMotion */ = {
-			isa = PBXGroup;
-			children = (
-				EF4A378770D336144AB71228 /* README.md */,
-			);
-			path = ClassMotion;
-			sourceTree = "<group>";
-		};
 		3634544B6FAC934A5CE9CC62 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +146,7 @@
 		A02A6563A17E32EF64E743BD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				15621C98F16FE636CAE3AED0 /* ClassMotion */,
+				7B4C795BE0F224114D60384E /* ClassMotion */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -170,10 +162,10 @@
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_49BB1D8D-5666-4CC5-8475-90C2BBD4A460" /* ios */ = {
+		"TEMP_57E36567-7F0C-4031-B71D-C835DDF81EF4" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_CFBBADBD-4C77-443A-9616-CF05D93941E7" /* Signing.xcconfig */,
+				"TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -260,7 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A032E175F1F93B91D796E9C3 /* Assets.xcassets in Resources */,
-				EDA2AF74E3C6F3ECB430E970 /* README.md in Resources */,
+				BAFFC25E0BD1BA378BC637FE /* ClassMotion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,7 +382,7 @@
 		};
 		4C7BEB054887AD09F8746349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_CFBBADBD-4C77-443A-9616-CF05D93941E7" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
@@ -492,7 +484,7 @@
 		};
 		C2C4CE9010EE9AD21ED46767 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_CFBBADBD-4C77-443A-9616-CF05D93941E7" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;

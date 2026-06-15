@@ -140,9 +140,11 @@ touching mechanics.
   sit *over* the background; the class art currently *fills* the background,
   so full-frame opaque clips are the default and simplest.
 - **Bundle resources, not the asset catalog** (catalogs don't loop video): a
-  `ClassMotion/` group, one clip per class named to mirror `ClassArt` —
-  `ClassMotion/Wizard.mov`. A name lookup picks the clip up with no code
-  change, just like the static figures (pillar 6).
+  `ClassMotion/` folder reference organized **per class, then per moment** —
+  `ClassMotion/Wizard/focus/<clip>.mov`. The loader finds the first clip in
+  the matching folder (any filename), so dropping a file in is the only step
+  (pillar 6). A folder reference preserves the structure and needs only a
+  rebuild — no project regen.
 - **One ambient loop per class is the baseline.** Dedicated reveal/flourish
   clips for the ceremony and level-up are optional per class — when absent,
   those moments play the ambient loop (or the static image).
