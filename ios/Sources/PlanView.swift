@@ -308,8 +308,8 @@ private struct ClassDetailView: View {
         ZStack(alignment: .bottom) {
             // Full art, undimmed; tap anywhere on it to dismiss.
             Group {
-                if ClassArtwork.exists(for: classes.current) {
-                    Image(classes.current.artworkName)
+                if let art = ClassImageLoader.image(classes.current.artworkName, maxDimension: 2000) {
+                    Image(uiImage: art)
                         .resizable()
                         .scaledToFill()
                 } else {

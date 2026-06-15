@@ -14,12 +14,13 @@ struct ClassArtwork: View {
     /// Whether real art is present (vs. the SF-symbol placeholder) — lets
     /// callers reshape layout around a portrait.
     static func exists(for focusClass: FocusClass) -> Bool {
-        UIImage(named: focusClass.artworkName) != nil
+        ClassImageLoader.exists(focusClass.artworkName)
     }
 
     var body: some View {
-        if Self.exists(for: focusClass) {
-            Image(focusClass.artworkName)
+        // Thumbnail-sized: badge ~200pt, ceremony ~240pt → 700px covers 3×.
+        if let art = ClassImageLoader.image(focusClass.artworkName, maxDimension: 700) {
+            Image(uiImage: art)
                 .resizable()
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)

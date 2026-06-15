@@ -24,7 +24,8 @@ struct ContentView: View {
         // The current class's artwork is the app's backdrop (scrimmed for
         // legibility); accents still follow the ladder tint. Classes without
         // art fall back to the level-tint wash.
-        .background(ClassBackground(focusClass: classes.current, tint: experience.level.tint))
+        .background(ClassBackground(artworkName: classes.current.artworkName,
+                                    tint: experience.level.tint).equatable())
         .tint(experience.level.tint)
         // Cross-fade when a promotion/demotion or a class change lands.
         .animation(.easeInOut(duration: 0.8), value: experience.levelIndex)
@@ -55,18 +56,21 @@ struct ContentView: View {
 /// foreground text and controls stay legible in both light and dark mode —
 /// the veil deepens toward the bottom, where the pinned action buttons live.
 /// Falls back to the level-tint wash when the class has no art yet.
-private struct ClassBackground: View {
-    let focusClass: FocusClass
+private struct ClassBackground: View, Equatable {
+    let artworkName: String
     let tint: Color
 
+    // Equatable + `.equatable()` so the parent's frequent re-renders (the
+    // 0.5s focus ticker, every quest/coin change) don't re-composite a
+    // full-screen image when the class and tint haven't actually changed.
+    static func == (lhs: ClassBackground, rhs: ClassBackground) -> Bool {
+        lhs.artworkName == rhs.artworkName && lhs.tint == rhs.tint
+    }
+
     var body: some View {
-        if ClassArtwork.exists(for: focusClass) {
+        if let art = ClassImageLoader.image(artworkName, maxDimension: 1600) {
             Color.clear
-                .overlay(
-                    Image(focusClass.artworkName)
-                        .resizable()
-                        .scaledToFill()
-                )
+                .overlay(Image(uiImage: art).resizable().scaledToFill())
                 .overlay(
                     LinearGradient(colors: [Color(.systemBackground).opacity(0.45),
                                             Color(.systemBackground).opacity(0.82)],
