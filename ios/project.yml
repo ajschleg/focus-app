@@ -21,6 +21,8 @@ targets:
       - path: Sources
       # App icon lives here; regenerate it with ios/Tools/make-app-icon.swift.
       - path: Assets.xcassets
+      # Class animation clips (ART.md §7), bundled as resources.
+      - path: Resources
     # Shared scheme so a clean clone can build without Xcode autocreating
     # one; ⌘U runs the ClassEngine suite (CLASSES.md §12).
     scheme:

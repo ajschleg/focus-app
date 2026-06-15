@@ -10,6 +10,7 @@ struct ContentView: View {
     @EnvironmentObject private var workouts: WorkoutMonitor
     @EnvironmentObject private var classes: ClassStore
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Group {
@@ -24,8 +25,18 @@ struct ContentView: View {
         // The current class's artwork is the app's backdrop (scrimmed for
         // legibility); accents still follow the ladder tint. Classes without
         // art fall back to the level-tint wash.
-        .background(ClassBackground(artworkName: classes.current.artworkName,
-                                    tint: experience.level.tint).equatable())
+        .background {
+            // During a block, the class's focus animation drives the
+            // background (scrimmed, calm — ART.md §7); everywhere else, the
+            // still image. Reduce Motion / no clip → always the still.
+            if engine.state == .focusing, !reduceMotion,
+               let clip = ClassMotionLoader.url(classes.current.name, .focus) {
+                FocusMotionBackground(url: clip)
+            } else {
+                ClassBackground(artworkName: classes.current.artworkName,
+                                tint: experience.level.tint).equatable()
+            }
+        }
         .tint(experience.level.tint)
         // Cross-fade when a promotion/demotion or a class change lands.
         .animation(.easeInOut(duration: 0.8), value: experience.levelIndex)
@@ -56,6 +67,24 @@ struct ContentView: View {
 /// foreground text and controls stay legible in both light and dark mode —
 /// the veil deepens toward the bottom, where the pinned action buttons live.
 /// Falls back to the level-tint wash when the class has no art yet.
+/// The focus-block background: the class's focus animation, scrimmed for
+/// legibility the same way the still background is (ART.md §7 — calm, never
+/// pulling the eye off the timer).
+private struct FocusMotionBackground: View {
+    let url: URL
+
+    var body: some View {
+        LoopingVideoView(url: url)
+            .overlay(
+                LinearGradient(colors: [Color(.systemBackground).opacity(0.45),
+                                        Color(.systemBackground).opacity(0.82)],
+                               startPoint: .top, endPoint: .bottom)
+            )
+            .clipped()
+            .ignoresSafeArea()
+    }
+}
+
 private struct ClassBackground: View, Equatable {
     let artworkName: String
     let tint: Color

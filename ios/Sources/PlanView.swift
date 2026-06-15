@@ -303,12 +303,16 @@ private struct LevelBadge: View {
 private struct ClassDetailView: View {
     @ObservedObject var classes: ClassStore
     let dismiss: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Full art, undimmed; tap anywhere on it to dismiss.
+            // Full art, undimmed; tap anywhere on it to dismiss. The info
+            // animation plays here when present (ART.md §7) — else the still.
             Group {
-                if let art = ClassImageLoader.image(classes.current.artworkName, maxDimension: 2000) {
+                if !reduceMotion, let clip = ClassMotionLoader.url(classes.current.name, .info) {
+                    LoopingVideoView(url: clip)
+                } else if let art = ClassImageLoader.image(classes.current.artworkName, maxDimension: 2000) {
                     Image(uiImage: art)
                         .resizable()
                         .scaledToFill()
