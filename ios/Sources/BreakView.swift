@@ -57,7 +57,7 @@ struct BreakView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 6)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.solidBordered)
             .controlSize(.large)
         }
         .padding()

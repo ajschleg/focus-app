@@ -110,6 +110,7 @@ struct ReviewView: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
+            .liftedOverBackground()
             .padding(.horizontal)
             .padding(.vertical, 8)
             .background(.ultraThinMaterial)

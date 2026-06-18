@@ -112,6 +112,7 @@ struct PlanView: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
+            .liftedOverBackground()
             .padding(.horizontal)
             .padding(.vertical, 8)
             .background(.ultraThinMaterial)
@@ -389,7 +390,7 @@ private struct PathShiftCard: View {
             }
         }
         .padding()
-        .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+        .menuSurface(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
 
@@ -418,7 +419,7 @@ private struct DebugClassPicker: View {
                 .font(.caption.weight(.semibold))
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(.quaternary, in: Capsule())
+                .menuSurface(Capsule())
         }
     }
 }
@@ -436,7 +437,7 @@ private struct StatChip: View {
             .foregroundStyle(tint)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(.quaternary, in: Capsule())
+            .menuSurface(Capsule())
     }
 }
 
@@ -464,7 +465,7 @@ private struct MenuQuestRow: View {
             trailing
         }
         .padding()
-        .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+        .menuSurface(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     @ViewBuilder private var trailing: some View {
@@ -475,7 +476,7 @@ private struct MenuQuestRow: View {
                 .foregroundStyle(.green)
         case .offered where quest.isSelfReported:
             Button("Done", action: reportDone)
-                .buttonStyle(.bordered)
+                .buttonStyle(.solidBordered)
                 .controlSize(.small)
         case .offered where quest.isAutomatic:
             // Nothing to tap — an outside signal (Health) completes these.
@@ -489,7 +490,7 @@ private struct MenuQuestRow: View {
             VStack(alignment: .trailing, spacing: 6) {
                 bounty
                 Button("Accept", action: accept)
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.solidBordered)
                     .controlSize(.small)
             }
         case .active:
@@ -532,7 +533,7 @@ private struct TemplateRow: View {
                     .foregroundStyle(selected ? AnyShapeStyle(.tint) : AnyShapeStyle(.secondary))
             }
             .padding()
-            .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+            .menuSurface(RoundedRectangle(cornerRadius: 12, style: .continuous), selected: selected)
         }
         .buttonStyle(.plain)
     }

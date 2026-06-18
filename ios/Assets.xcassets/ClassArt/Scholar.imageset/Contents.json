@@ -1,5 +1,10 @@
 {
-  "images" : [],
+  "images" : [
+    {
+      "filename" : "Scholar.png",
+      "idiom" : "universal"
+    }
+  ],
   "info" : {
     "author" : "xcode",
     "version" : 1

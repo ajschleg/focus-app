@@ -36,6 +36,7 @@ struct FirstClassCeremonyView: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
+            .liftedOverBackground()
         }
         .padding()
     }

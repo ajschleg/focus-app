@@ -26,6 +26,17 @@ targets:
       # adding a clip needs only a rebuild (no xcodegen regen).
       - path: Resources/ClassMotion
         type: folder
+    preBuildScripts:
+      # Normalize the ClassArt naming convention before the asset catalog is
+      # compiled: a PNG dropped into a <Class>.imageset only loads once it's
+      # named <Class>.png and Contents.json points at it (ClassImageLoader
+      # uses UIImage(named:)). This auto-renames + wires any drop and lets the
+      # build proceed, so dropping art "just works" — no manual step. Runs
+      # first (preBuildScript), so the rename lands before actool reads the
+      # catalog. Requires script sandboxing off (set below) since it writes.
+      - name: Sync ClassArt naming
+        basedOnDependencyAnalysis: false
+        script: /bin/zsh "$SRCROOT/Tools/sync-class-art.sh" --quiet
     # Shared scheme so a clean clone can build without Xcode autocreating
     # one; ⌘U runs the ClassEngine suite (CLASSES.md §12).
     scheme:
@@ -56,6 +67,9 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ajschleg.FocusSlice
         TARGETED_DEVICE_FAMILY: "1"        # iPhone only
+        # The "Sync ClassArt naming" pre-build phase renames dropped-in art and
+        # rewrites Contents.json, so it must be allowed to write the source tree.
+        ENABLE_USER_SCRIPT_SANDBOXING: "NO"
         GENERATE_INFOPLIST_FILE: "YES"
         ENABLE_PREVIEWS: "YES"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

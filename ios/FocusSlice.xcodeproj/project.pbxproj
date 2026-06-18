@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B883FE417927688C96F07BC /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888F3CE7E2D88D08997748C /* FocusView.swift */; };
+		2997E76D047CAF86E1557BC8 /* ActionButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5F830A4E2B35EC4D75B7B8 /* ActionButtonStyles.swift */; };
 		2AE34C9320CAEBB26EF7547F /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048E0C38704627F6294DD78 /* Quest.swift */; };
 		390246EF7CE76014BCBEE42C /* LoopingVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFE9782426D28996EFEA20 /* LoopingVideoView.swift */; };
 		400C8C01384EF3209E4AF878 /* Chronicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A3991C5335BEF050223DC0 /* Chronicle.swift */; };
@@ -56,6 +57,7 @@
 		136112825C6CE978412EAD08 /* ClassEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEngineTests.swift; sourceTree = "<group>"; };
 		2EEE507913752DE92CD715A7 /* FocusClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusClass.swift; sourceTree = "<group>"; };
 		36D497AF4620EB6F17673852 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		3E5F830A4E2B35EC4D75B7B8 /* ActionButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonStyles.swift; sourceTree = "<group>"; };
 		427D218E8C2D8E574CE62870 /* ClassEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEngine.swift; sourceTree = "<group>"; };
 		42C9DFF012FA1A3C0AFF976E /* ClassStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassStore.swift; sourceTree = "<group>"; };
 		47C1B7FB80519B1B2794FE04 /* MotionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetector.swift; sourceTree = "<group>"; };
@@ -86,13 +88,14 @@
 		E1A95F99A3FA6A4CFD960598 /* QuestBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestBoard.swift; sourceTree = "<group>"; };
 		E3ED950FEF27AACBC8AAC01B /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		F8A3991C5335BEF050223DC0 /* Chronicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chronicle.swift; sourceTree = "<group>"; };
-		"TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_DC821143-776D-4FEE-84B6-653E05777DAE" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		08993A6005BAFC6D54628CE3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3E5F830A4E2B35EC4D75B7B8 /* ActionButtonStyles.swift */,
 				645A25EF5DDAB94CFF9E65C5 /* Affinity.swift */,
 				CB0650365E81903B22E47911 /* BlockNotifier.swift */,
 				AB26F535636FF8220E41451F /* BreakPromptView.swift */,
@@ -162,10 +165,10 @@
 			);
 			sourceTree = "<group>";
 		};
-		"TEMP_57E36567-7F0C-4031-B71D-C835DDF81EF4" /* ios */ = {
+		"TEMP_D5B6A77F-B960-42B1-8467-EB6D1CFC0033" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */,
+				"TEMP_DC821143-776D-4FEE-84B6-653E05777DAE" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4841A4D669C85C7851B60666 /* Build configuration list for PBXNativeTarget "FocusSlice" */;
 			buildPhases = (
+				7C6827521567B60E93547E43 /* Sync ClassArt naming */,
 				9457088C5B6282647AB377C2 /* Sources */,
 				A223F6B901F5D01925689AF9 /* Resources */,
 			);
@@ -258,6 +262,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7C6827521567B60E93547E43 /* Sync ClassArt naming */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sync ClassArt naming";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/zsh \"$SRCROOT/Tools/sync-class-art.sh\" --quiet";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22BDA0E75E9033E17A7BDE3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2997E76D047CAF86E1557BC8 /* ActionButtonStyles.swift in Sources */,
 				CD6E709B564CC8B175467F37 /* Affinity.swift in Sources */,
 				B91063D0615D7DA61FBE3402 /* BlockNotifier.swift in Sources */,
 				60927EE72B1D85A67F3643C7 /* BreakPromptView.swift in Sources */,
@@ -382,12 +409,13 @@
 		};
 		4C7BEB054887AD09F8746349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_DC821143-776D-4FEE-84B6-653E05777DAE" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = FocusSlice;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "FocusSlice reads your workouts so the daily exercise quest completes automatically when you log one.";
@@ -484,12 +512,13 @@
 		};
 		C2C4CE9010EE9AD21ED46767 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_8FB7A9B1-ED66-49BB-BBD5-90CF28199721" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_DC821143-776D-4FEE-84B6-653E05777DAE" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FocusSlice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = FocusSlice;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "FocusSlice reads your workouts so the daily exercise quest completes automatically when you log one.";

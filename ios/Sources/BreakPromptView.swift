@@ -66,6 +66,7 @@ struct BreakPromptView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.green)
                 .controlSize(.large)
+                .liftedOverBackground()
 
                 Button {
                     engine.skipBreak()
@@ -74,7 +75,7 @@ struct BreakPromptView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.solidBordered)
                 .controlSize(.large)
             }
         }
