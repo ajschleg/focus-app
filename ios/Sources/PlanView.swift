@@ -255,11 +255,11 @@ private struct LevelBadge: View {
             // duplicate it. The title text below still names rank + class.
             ZStack {
                 Circle()
-                    .fill(level.tint.opacity(0.15))
+                    .fill(level.tint)
                     .frame(width: 84, height: 84)
                 Image(systemName: level.systemImage)
                     .font(.system(size: 36))
-                    .foregroundStyle(level.tint)
+                    .foregroundStyle(.white)
             }
             HStack(spacing: 6) {
                 Text("Level \(experience.levelNumber) · \(level.name) \(classes.current.name)")
